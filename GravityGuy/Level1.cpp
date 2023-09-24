@@ -82,13 +82,19 @@ void Level1::Init()
     plat = new Platform(window->CenterX() + 600, window->Height() - 20, 2, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(window->CenterX(), window->Height() +250,3, white);
+    plat = new Platform(window->CenterX() - 400, 0, 2, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(window->CenterX() + 200, window->Height() - 220,2, white);
+    plat = new Platform(window->CenterX() + 400, 0, 2, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(window->Width() - 20, window->CenterY(), 3, white);
+    plat = new Platform(window->CenterX(), window->Height() +280,3, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(window->CenterX() + 200, window->Height() - 200,2, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(window->Width() - 20, window->CenterY() +310, 3, white);
     scene->Add(plat, STATIC);
 
     plat = new Platform(20, window->CenterY(), 3, white);

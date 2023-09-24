@@ -86,12 +86,12 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
     // configura o motor
     engine->window->Mode(WINDOWED);
-    engine->window->Size(600, 300);
+    engine->window->Size(800, 800);
     engine->window->Color(30, 50, 80);
     engine->window->Title("Gravity Guy");
     engine->window->Icon(IDI_ICON);
     engine->window->Cursor(IDC_CURSOR);
-    //engine->graphics->VSync(true);
+    engine->graphics->VSync(true);
 
     // inicia o jogo
     int status = engine->Start(new GravityGuy());

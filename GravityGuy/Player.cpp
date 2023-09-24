@@ -94,6 +94,7 @@ void Player::OnCollision(Object * obj)
 void Player::Update()
 {
     gravity = 200;
+    velY = 200;
     // ação da gravidade sobre o personagem  
     Translate(0, gravity * gameTime);
 
@@ -104,6 +105,7 @@ void Player::Update()
 
     if (hasDash && !dashing && window->KeyPress(VK_SPACE))
     {
+        MoveTo(x, y - 5, Layer::MIDDLE);
         jumping = false;
         sideJumping = false;
         dashing = true;
