@@ -173,7 +173,9 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Spike.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Strawberry.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -201,7 +203,9 @@
     <ClInclude Include="Resources.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="Spike.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Strawberry.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TileSet.h" />
     <ClInclude Include="Timer.h" />

@@ -16,15 +16,20 @@
 
 #include "Game.h"
 #include "Sprite.h"
-
+#include "Font.h"
+#include <sstream>
+using std::stringstream;
 // ------------------------------------------------------------------------------
 
 class GameOver : public Game
 {
 private:
     Sprite * title = nullptr;       // tela de fim
+    stringstream deathCount;              // texto temporário
+    stringstream strawberryCount;              // texto temporário
 
 public:
+    static Font* font;            // fonte para texto
     void Init();                    // inicialização do nível
     void Update();                  // lógica da tela de fim
     void Draw();                    // desenho da tela

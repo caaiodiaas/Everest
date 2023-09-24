@@ -21,7 +21,7 @@
 
 // ------------------------------------------------------------------------------
 
-enum Gravity {NORMAL,INVERTED, STILL};         // tipo da gravidade
+enum Animations {WALKINGRIGHT, WALKINGLEFT, STILLRIGHT, STILLLEFT};         // tipo da gravidade
 
 // ---------------------------------------------------------------------------------
 
@@ -31,9 +31,14 @@ private:
     TileSet   * tileset;                // folha de sprites do personagem
     Animation * anim;                   // animação do personagem
     int         level;                  // nível finalizado
+    int lastSide;
 
     
 public:
+    uint deathCount;
+    uint strawberryCount;              
+    boolean isDead;
+
     uint        gravity;                // gravidade atuando sobre o jogador
     int velX;
     int velY;
@@ -55,9 +60,13 @@ public:
     ~Player();                          // destrutor
 
     void Reset();                       // volta ao estado inicial
+    void ResetAll();                       // volta ao estado inicial
+    void Dead();
     int Level();                        // último nível finalizado
     float Bottom();                     // coordenadas da base
     float Top();                        // coordenadas do topo
+    float Right();                     // coordenadas da base
+    float Left();                        // coordenadas do topo
 
     void OnCollision(Object * obj);     // resolução da colisão
     void Update();                      // atualização do objeto
@@ -75,6 +84,16 @@ inline float Player::Bottom()
 
 inline float Player::Top()
 { return y - tileset->Height()/2; }
+
+inline float Player::Right()
+{
+    return x;
+}
+
+inline float Player::Left()
+{
+    return x ;
+}
 
 inline void Player::Draw()
 { anim->Draw(x, y, z); }

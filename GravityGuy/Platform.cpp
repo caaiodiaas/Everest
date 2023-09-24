@@ -52,96 +52,101 @@ void Platform::Update()
 
 void Platform::OnCollision(Object* obj)
 {
-    Player* player = (Player*)obj;
+    if (obj->Type() == 0)
+    {
+        Player* player = (Player*)obj;
 
-    // Colisões eixo X
+        // Colisões eixo X
 
-    //Plataforma na esquerda
-    if (player->X() + 5 < x - platform->Width() / 2) {
-        player->MoveTo(x - platform->Width() / 2 - 15, player->Y(), Layer::MIDDLE);
-        if (player->dashing)
-        {
-            player->velX = 0;
-        }
-        if (window->KeyDown(VK_RIGHT) && player->hasSideJump && !player->jumping)
-        {
-            player->Translate(0, -150 * gameTime);
-            player->sideJumping = false;
-            if (window->KeyPress(VK_UP) && !player->dashing) {
-                player->jumping = false;
-                player->MoveTo(x - platform->Width() / 2 - 25, player->Y(), Layer::MIDDLE);
-                player->sideJumping = true;
-                player->sideJumpSide = 1;
-                player->sideJumpTimer->Start();
-                player->hasSideJump = false;
-            }
-        }
-
-
-    }
-    else
-
-        //Plataforma na direita
-        if (player->X() - 5 > x + platform->Width() / 2) {
-            player->MoveTo(x + platform->Width() / 2 + 15, player->Y(), Layer::MIDDLE);
+        //Plataforma na esquerda
+        if (player->X() + 5 < x - platform->Width() / 2) {
+            player->MoveTo(x - platform->Width() / 2 - 15, player->Y(), Layer::MIDDLE);
             if (player->dashing)
             {
                 player->velX = 0;
             }
-            if (window->KeyDown(VK_LEFT) && player->hasSideJump && !player->jumping)
+            if (window->KeyDown(VK_RIGHT) && player->hasSideJump && !player->jumping)
             {
-                player->Translate(0,-150*gameTime);
+                player->Translate(0, -150 * gameTime);
                 player->sideJumping = false;
                 if (window->KeyPress(VK_UP) && !player->dashing) {
                     player->jumping = false;
-                    player->MoveTo(x + platform->Width() / 2 + 25, player->Y(), Layer::MIDDLE);
+                    player->MoveTo(x - platform->Width() / 2 - 25, player->Y(), Layer::MIDDLE);
                     player->sideJumping = true;
-                    player->sideJumpSide = 0;
+                    player->sideJumpSide = 1;
                     player->sideJumpTimer->Start();
                     player->hasSideJump = false;
                 }
             }
 
-        }else
-        // Colisões eixo Y
-            //Plataforma abaixo
-            if (player->Y() < y - platform->Height() / 2) {
-                player->MoveTo(player->X(), y - platform->Height() / 2 - 20, Layer::MIDDLE);
 
-                if (player->X()  > x - platform->Width() / 2 && player->X() < x + platform->Width() / 2 || player->X()  < x + platform->Width() / 2 && player->X()  > x - platform->Width() / 2)
+        }
+        else
+
+            //Plataforma na direita
+            if (player->X() - 5 > x + platform->Width() / 2) {
+                player->MoveTo(x + platform->Width() / 2 + 15, player->Y(), Layer::MIDDLE);
+                if (player->dashing)
                 {
-                    if (!player->dashing) {
-                        player->hasDash = true;
+                    player->velX = 0;
+                }
+                if (window->KeyDown(VK_LEFT) && player->hasSideJump && !player->jumping)
+                {
+                    player->Translate(0, -150 * gameTime);
+                    player->sideJumping = false;
+                    if (window->KeyPress(VK_UP) && !player->dashing) {
+                        player->jumping = false;
+                        player->MoveTo(x + platform->Width() / 2 + 25, player->Y(), Layer::MIDDLE);
+                        player->sideJumping = true;
+                        player->sideJumpSide = 0;
+                        player->sideJumpTimer->Start();
+                        player->hasSideJump = false;
                     }
-                    player->hasSideJump = true;
                 }
 
-                if (player->dashing && player->dashSide == 7 || player->dashSide == 5)
-                {
-                    if (window->KeyDown(VK_SPACE)) {
-                        player->MoveTo(player->X(), y - platform->Height() / 2 - 25, Layer::MIDDLE);
-                        player->hasDash = true;
-                        player->waveDashing = true;
-                    }
-                       
+            }
+            else
+                // Colisões eixo Y
+                    //Plataforma abaixo
+                if (player->Y() < y - platform->Height() / 2) {
+                    player->MoveTo(player->X(), y - platform->Height() / 2 - 20, Layer::MIDDLE);
 
-                }else if (window->KeyPress(VK_UP)) {
                     if (player->X() > x - platform->Width() / 2 && player->X() < x + platform->Width() / 2 || player->X() < x + platform->Width() / 2 && player->X() > x - platform->Width() / 2)
                     {
-                        player->MoveTo(player->X(), y - platform->Height() / 2 - 25, Layer::MIDDLE);
-                        player->jumping = true;
-                        player->jumpTimer->Start();
+                        if (!player->dashing) {
+                            player->hasDash = true;
+                        }
+                        player->hasSideJump = true;
                     }
 
-                }
-            }else
-            //Plataforma acima
-            if (player->Y() > y + platform->Height() / 2) {
-                player->MoveTo(player->X(), y + platform->Height() / 2 + 25, Layer::MIDDLE);
-                player->jumping = false;
-            }
-        
+                    if (player->dashing && player->dashSide == 7 || player->dashSide == 5)
+                    {
+                        if (window->KeyDown(VK_SPACE)) {
+                            player->MoveTo(player->X(), y - platform->Height() / 2 - 25, Layer::MIDDLE);
+                            player->hasDash = true;
+                            player->waveDashing = true;
+                        }
 
+
+                    }
+                    else if (window->KeyPress(VK_UP)) {
+                        if (player->X() > x - platform->Width() / 2 && player->X() < x + platform->Width() / 2 || player->X() < x + platform->Width() / 2 && player->X() > x - platform->Width() / 2)
+                        {
+                            player->MoveTo(player->X(), y - platform->Height() / 2 - 25, Layer::MIDDLE);
+                            player->jumping = true;
+                            player->jumpTimer->Start();
+                        }
+
+                    }
+                }
+                else
+                    //Plataforma acima
+                    if (player->Y() > y + platform->Height() / 2) {
+                        player->MoveTo(player->X(), y + platform->Height() / 2 + 25, Layer::MIDDLE);
+                        player->jumping = false;
+                    }
+
+    }
 
         
 

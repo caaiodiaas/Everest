@@ -17,27 +17,27 @@
 
 Player::Player()
 {
-    tileset = new TileSet("Resources/GravityGuy.png", 32, 48, 5, 10);
+    tileset = new TileSet("Resources/player.png", 51, 57, 9, 18);
     anim = new Animation(tileset, 0.120f, true);
 
     // sequências de animação do player
-    uint still[1] = { 0};
-    uint invert[4] = {6,7,8,9};
-    uint normal[4] = {1,2,3,4};
+    uint stillRight[1] = { 0};
+    uint stillLeft[1] = { 17 };
+    uint walkingRight[8] = {1,2,3,4,5,6,7,8};
+    uint walkingLeft[8] = { 9,10,11,12,13,14,15,16 };
 
-    anim->Add(INVERTED, invert, 4);
-    anim->Add(NORMAL, normal, 4);
-    anim->Add(STILL, still, 1);
+    anim->Add(WALKINGRIGHT, walkingRight, 8);
+    anim->Add(WALKINGLEFT, walkingLeft, 8);
+    anim->Add(STILLRIGHT, stillRight, 1);
+    anim->Add(STILLLEFT, stillLeft, 1);
 
     // cria bounding box
     BBox(new Rect(
-        -1.0f * tileset->TileWidth() / 2.0f,
-        -1.0f * tileset->TileHeight() / 2.0f,
-        tileset->TileWidth() / 2.0f,
-        tileset->TileHeight() / 2.0f));
+        -1.0f * (tileset->TileWidth()-19) / 2.0f,
+        -1.0f * (tileset->TileHeight()-9) / 2.0f,
+        (tileset->TileWidth() - 19) / 2.0f,
+        (tileset->TileHeight() - 9) / 2.0f));
     
-    // inicializa estado do player
-    gravity = NORMAL;  
     level = 0;
 
     // posição inicial
@@ -60,6 +60,15 @@ Player::Player()
     velX = 200;
     velY = 200;
     gravity = 200;
+
+    deathCount = 0;
+    isDead = false;
+
+    strawberryCount = 0;
+
+    type = 0;
+
+    lastSide = 0;
 }
 
 // ---------------------------------------------------------------------------------
@@ -74,10 +83,30 @@ Player::~Player()
 
 void Player::Reset()
 {
-    // volta ao estado inicial
-    MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
-    gravity = NORMAL;
-    level = 0;
+    gravity = 200;
+    velX = 200;
+    velY = 200;
+    isDead = false;
+}
+
+void Player::ResetAll()
+{
+    gravity = 200;
+    velX = 200;
+    velY = 200;
+    isDead = false;
+    deathCount = 0;
+    strawberryCount = 0;
+}
+
+
+void Player::Dead()
+{
+    gravity = 0;
+    velX = 0;
+    velY = 0;
+    hasDash = false;
+    hasSideJump = false;
 }
 
 
@@ -93,15 +122,21 @@ void Player::OnCollision(Object * obj)
 
 void Player::Update()
 {
-    gravity = 200;
-    velY = 200;
     // ação da gravidade sobre o personagem  
     Translate(0, gravity * gameTime);
 
-    if (window->KeyDown(VK_RIGHT))
+    if (window->KeyDown(VK_RIGHT)) {
+        lastSide = 0;
         Translate(velX * gameTime, 0);
-    if (window->KeyDown(VK_LEFT))
+        anim->Select(WALKINGRIGHT);
+    }
+
+    if (window->KeyDown(VK_LEFT)) {
+        lastSide = 1;
         Translate(-velX * gameTime, 0);
+        anim->Select(WALKINGLEFT);
+    }
+
 
     if (hasDash && !dashing && window->KeyPress(VK_SPACE))
     {
@@ -212,14 +247,19 @@ void Player::Update()
     // atualiza animação
     
     if (hasDash) {
-        anim->Select(NORMAL);
         if (!window->KeyDown(VK_DOWN) && !window->KeyDown(VK_RIGHT) && !window->KeyDown(VK_LEFT) && !window->KeyDown(VK_DOWN)) {
-            anim->Select(STILL);
+            if (lastSide == 0)
+            {
+                anim->Select(STILLRIGHT);
+
+            }
+            else {
+                anim->Select(STILLLEFT);
+            }
+
         }
     }
-    else {
-        anim->Select(INVERTED);
-    }
+
     anim->NextFrame();
 }
 
