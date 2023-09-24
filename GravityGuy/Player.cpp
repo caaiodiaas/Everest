@@ -59,7 +59,7 @@ Player::Player()
 
     velX = 200;
     velY = 200;
-    gravity = 200;
+    gravity = 250;
 
     deathCount = 0;
     isDead = false;
@@ -83,7 +83,7 @@ Player::~Player()
 
 void Player::Reset()
 {
-    gravity = 200;
+    gravity = 250;
     velX = 200;
     velY = 200;
     isDead = false;
@@ -91,7 +91,7 @@ void Player::Reset()
 
 void Player::ResetAll()
 {
-    gravity = 200;
+    gravity = 250;
     velX = 200;
     velY = 200;
     isDead = false;
@@ -138,7 +138,7 @@ void Player::Update()
     }
 
 
-    if (hasDash && !dashing && window->KeyPress(VK_SPACE))
+    if (hasDash && !dashing && window->KeyPress(VK_SPACE) && !waveDashing)
     {
         MoveTo(x, y - 5, Layer::MIDDLE);
         jumping = false;

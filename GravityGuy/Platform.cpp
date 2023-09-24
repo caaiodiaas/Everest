@@ -59,8 +59,17 @@ void Platform::OnCollision(Object* obj)
         // Colisões eixo X
 
         //Plataforma na esquerda
-        if (player->X() + 5 < x - platform->Width() / 2) {
-            player->MoveTo(x - platform->Width() / 2 - 15, player->Y(), Layer::MIDDLE);
+        if (player->X() + 5 < x - platform->Width() / 2 + 10) {
+            if (player->Y() + 15 < y - platform->Height() / 2)
+            {
+                player->MoveTo(x - platform->Width() / 2, player->Y(), Layer::MIDDLE);
+            }
+            else {
+
+                if(window->KeyDown(VK_RIGHT))
+                player->MoveTo(x - platform->Width() / 2 - 15, player->Y(), Layer::MIDDLE);
+            }
+
             if (player->dashing)
             {
                 player->velX = 0;
@@ -84,8 +93,16 @@ void Platform::OnCollision(Object* obj)
         else
 
             //Plataforma na direita
-            if (player->X() - 5 > x + platform->Width() / 2) {
-                player->MoveTo(x + platform->Width() / 2 + 15, player->Y(), Layer::MIDDLE);
+            if (player->X() - 5 > x + platform->Width() / 2 -10) {
+                if (player->Y() + 15 < y - platform->Height() / 2)
+                {
+                    player->MoveTo(x + platform->Width() / 2 + 5, player->Y(), Layer::MIDDLE);
+                }
+                else {
+                    if (window->KeyDown(VK_LEFT))
+                    player->MoveTo(x + platform->Width() / 2 + 15, player->Y(), Layer::MIDDLE);
+                }
+
                 if (player->dashing)
                 {
                     player->velX = 0;
