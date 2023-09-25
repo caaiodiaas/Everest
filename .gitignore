@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+*.vsidx
+*.vsidx
+*.pdb
+*.vsidx
