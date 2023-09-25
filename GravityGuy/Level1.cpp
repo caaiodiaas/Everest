@@ -107,6 +107,15 @@ void Level1::Update()
 
     if (GravityGuy::player->isDead)
     {
+        if (GravityGuy::player->Y() < window->Height())
+        {
+            explosion = new Explosion(GravityGuy::player->X(), GravityGuy::player->Y(), scene);
+        }
+        else {
+            explosion = new Explosion(GravityGuy::player->X(), window->Height() - 20, scene);
+        }
+
+        scene->Add(explosion, STATIC);
         strawberry->Reset();
         GravityGuy::player->deathCount++;
         GravityGuy::player->Dead();

@@ -58,11 +58,11 @@ void Platform::OnCollision(Object* obj)
 
         // Colisões eixo X
 
-        //Plataforma na esquerda
+        //Plataforma na direita
         if (player->X() + 5 < x - platform->Width() / 2 + 10) {
             if (player->Y() + 15 < y - platform->Height() / 2)
             {
-                player->MoveTo(x - platform->Width() / 2, player->Y(), Layer::MIDDLE);
+                player->MoveTo(x - platform->Width() / 2 - 5, player->Y(), Layer::MIDDLE);
             }
             else {
 
@@ -76,6 +76,13 @@ void Platform::OnCollision(Object* obj)
             }
             if (window->KeyDown(VK_RIGHT) && player->hasSideJump && !player->jumping)
             {
+                if (player->hasDash)
+                {
+                    player->anim->Select(GRABINGRIGHT);
+                }
+                else {
+                    player->anim->Select(GRABINGRIGHTB);
+                }
                 player->Translate(0, -150 * gameTime);
                 player->sideJumping = false;
                 if (window->KeyPress(VK_UP) && !player->dashing) {
@@ -92,7 +99,7 @@ void Platform::OnCollision(Object* obj)
         }
         else
 
-            //Plataforma na direita
+            //Plataforma na esquerda
             if (player->X() - 5 > x + platform->Width() / 2 -10) {
                 if (player->Y() + 15 < y - platform->Height() / 2)
                 {
@@ -109,6 +116,14 @@ void Platform::OnCollision(Object* obj)
                 }
                 if (window->KeyDown(VK_LEFT) && player->hasSideJump && !player->jumping)
                 {
+                    
+                    if (player->hasDash)
+                    {
+                        player->anim->Select(GRABINGLEFT);
+                    }
+                    else {
+                        player->anim->Select(GRABINGLEFTB);
+                    }
                     player->Translate(0, -150 * gameTime);
                     player->sideJumping = false;
                     if (window->KeyPress(VK_UP) && !player->dashing) {
@@ -134,6 +149,7 @@ void Platform::OnCollision(Object* obj)
                             player->hasDash = true;
                         }
                         player->hasSideJump = true;
+                        player->onFloor = true;
                     }
 
                     if (player->dashing && player->dashSide == 7 || player->dashSide == 5)

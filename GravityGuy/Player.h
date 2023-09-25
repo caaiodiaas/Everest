@@ -21,7 +21,7 @@
 
 // ------------------------------------------------------------------------------
 
-enum Animations {WALKINGRIGHT, WALKINGLEFT, STILLRIGHT, STILLLEFT};         // tipo da gravidade
+enum Animations {WALKINGRIGHT, WALKINGLEFT, STILLRIGHT, STILLLEFT, DASHINGRIGHT, DASHINGLEFT, GRABINGRIGHT, GRABINGLEFT, GRABINGRIGHTB, GRABINGLEFTB, JUMPINGRIGHT, JUMPINGLEFT, JUMPINGRIGHTB, JUMPINGLEFTB, FALLINGRIGHT, FALLINGLEFT, FALLINGRIGHTB,FALLINGLEFTB};         // tipo da gravidade
 
 // ---------------------------------------------------------------------------------
 
@@ -29,14 +29,17 @@ class Player : public Object
 {
 private:
     TileSet   * tileset;                // folha de sprites do personagem
-    Animation * anim;                   // animação do personagem
     int         level;                  // nível finalizado
     int lastSide;
 
     
 public:
+    Animation* anim;                   // animação do personagem
     uint deathCount;
-    uint strawberryCount;              
+    uint strawberryCount;    
+
+    boolean onFloor;
+
     boolean isDead;
 
     uint        gravity;                // gravidade atuando sobre o jogador

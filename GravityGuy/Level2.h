@@ -21,6 +21,7 @@
 #include "Strawberry.h"
 #include "Background.h"
 #include "Font.h"
+#include "Explosion.h"
 #include <sstream>
 using std::stringstream;
 
@@ -33,6 +34,7 @@ private:
     stringstream deathCount;              // texto temporário
     stringstream strawberryCount;              // texto temporário
     Strawberry* strawberry = nullptr;
+    Explosion* explosion = nullptr;
 public:
     static Scene* scene;           // cena do nível
     static Font* font;            // fonte para texto
