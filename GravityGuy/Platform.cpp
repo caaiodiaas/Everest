@@ -24,7 +24,7 @@ Platform::Platform(float posX, float posY, uint platType, Color tint) : color(ti
     case SMALL:  platform = new Sprite("Resources/SmallHorizontal.png"); type = SMALL; break;
     case LARGEV:  platform = new Sprite("Resources/LongVertical.png"); type = LARGEV; break;
     case MEDIUMV: platform = new Sprite("Resources/MediumVertical.png"); type = MEDIUMV; break;
-    case SMALLV:  platform = new Sprite("Resources/LongVertical.png"); type = SMALLV; break;
+    case SMALLV:  platform = new Sprite("Resources/SmallVertical.png"); type = SMALLV; break;
     }
 
 
@@ -95,7 +95,7 @@ void Platform::OnCollision(Object* obj)
                 }
                 player->Translate(0, -150 * gameTime);
                 player->sideJumping = false;
-                if (window->KeyPress(VK_UP) && !player->dashing) {
+                if (window->KeyPress(VK_UP) || window->KeyPress('X') && !player->dashing) {
                     Everest::audio->Play(JUMP);
                     player->jumping = false;
                     player->MoveTo(x - platform->Width() / 2 - 25, player->Y(), Layer::MIDDLE);
@@ -145,7 +145,7 @@ void Platform::OnCollision(Object* obj)
                     }
                     player->Translate(0, -150 * gameTime);
                     player->sideJumping = false;
-                    if (window->KeyPress(VK_UP) && !player->dashing) {
+                    if (window->KeyPress(VK_UP) || window->KeyPress('X') && !player->dashing) {
                         Everest::audio->Play(JUMP);
                         player->jumping = false;
                         player->MoveTo(x + platform->Width() / 2 + 25, player->Y(), Layer::MIDDLE);
@@ -174,14 +174,14 @@ void Platform::OnCollision(Object* obj)
 
                     if (player->dashSide == 7 || player->dashSide == 5)
                     {
-                        if (window->KeyDown(VK_SPACE)) {
+                        if (window->KeyDown(VK_SPACE) || window->KeyDown('Z')) {
                             player->velX = 200;
                             Everest::audio->Play(JUMP);
                             player->MoveTo(player->X(), y - platform->Height() / 2 - 35, Layer::MIDDLE);
                             player->waveDashing = true;
                         }
                     }
-                    else if (window->KeyPress(VK_UP)) {
+                    else if (window->KeyPress(VK_UP) || window->KeyPress('X')) {
                         if (player->X() > x - platform->Width() / 2 && player->X() < x + platform->Width() / 2 || player->X() < x + platform->Width() / 2 && player->X() > x - platform->Width() / 2)
                         {
                             Everest::audio->Play(JUMP);

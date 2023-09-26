@@ -1,2 +1,9 @@
-﻿  Player.cpp
+﻿  Level2.cpp
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(43,39): warning C4305: 'argumento': truncamento de 'double' para 'float'
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(60,17): warning C4101: 'posY': variável local não referenciada
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(60,11): warning C4101: 'posX': variável local não referenciada
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(61,11): warning C4101: 'platType': variável local não referenciada
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(178,79): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(178,57): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(181,57): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
   GravityGuy.vcxproj -> C:\Users\caiod\Desktop\Lab18\GravityGuy\x64\Debug\GravityGuy.exe
