@@ -1,6 +1,6 @@
 /**********************************************************************************
 // Home (Arquivo de Cabeçalho)
-// 
+//
 // Criação:     14 Fev 2013
 // Atualização: 04 Set 2023
 // Compilador:  Visual C++ 2022
@@ -19,15 +19,27 @@
 #include "Sprite.h"
 #include "TileSet.h"
 #include "Animation.h"
+#include "Mouse.h"
+#include "Item.h"
+#include "Scene.h"
 
 // ------------------------------------------------------------------------------
 
+enum MenuID { INICIAR, SAIR, VENCER };
+
+// ------------------------------------------------------------------------------
 class Home : public Game
 {
 private:
-    Sprite * backg = nullptr;       // pano de fundo
-    TileSet * tileset = nullptr;    // tileset da animação
-    Animation * anim = nullptr;     // animação do menu
+    static const int MaxItens = 2;
+    Scene* scene = nullptr;
+    TileSet* backg = nullptr;       // pano de fundo
+    TileSet* tileset = nullptr;    // tileset da animação
+    Animation* anim = nullptr;     // animação do menu
+    Mouse* mouse = nullptr;
+    bool start;
+
+    Item* menu[MaxItens] = { 0 };
 
 public:
     void Init();                    // inicia nível

@@ -1,16 +1,16 @@
 /**********************************************************************************
 // Mouse (Arquivo de Cabeçalho)
-// 
+//
 // Criação:     14 Mai 2012
-// Atualização: 22 Set 2021
-// Compilador:  Visual C++ 2019
+// Atualização: 31 Ago 2023
+// Compilador:  Visual C++ 2022
 //
 // Descrição:   Gerencia mouse na tela
 //
 **********************************************************************************/
 
-#ifndef _TRIALSMENU_MOUSE_H_
-#define _TRIALSMENU_MOUSE_H_
+#ifndef _MOUSE_H_
+#define _MOUSE_H_
 
 // ---------------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ public:
     bool Clicked();     // click do mouse
     void Update();      // atualização do objeto
     void Draw();        // desenho do objeto 
-}; 
+};
 
 // ---------------------------------------------------------------------------------
 

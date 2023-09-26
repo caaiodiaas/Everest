@@ -1,9 +1,9 @@
 /**********************************************************************************
 // Mouse (Código Fonte)
-// 
+//
 // Criação:     14 Mai 2012
-// Atualização: 22 Set 2021
-// Compilador:  Visual C++ 2019
+// Atualização: 31 Ago 2023
+// Compilador:  Visual C++ 2022
 //
 // Descrição:   Gerencia mouse na tela
 //
@@ -11,7 +11,7 @@
 
 #include "Mouse.h"
 #include "Item.h"
-#include "Trials.h"
+#include "GravityGuy.h"
 
 // ---------------------------------------------------------------------------------
 
