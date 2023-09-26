@@ -95,7 +95,7 @@ void Platform::OnCollision(Object* obj)
                 }
                 player->Translate(0, -150 * gameTime);
                 player->sideJumping = false;
-                if (window->KeyPress(VK_UP) || window->KeyPress('X') && !player->dashing) {
+                if ((window->KeyPress(VK_UP) || window->KeyPress('X')) && !player->dashing) {
                     Everest::audio->Play(JUMP);
                     player->jumping = false;
                     player->MoveTo(x - platform->Width() / 2 - 25, player->Y(), Layer::MIDDLE);
@@ -133,7 +133,7 @@ void Platform::OnCollision(Object* obj)
                     player->sideJumpTimer->Reset();
                 }
 
-                if (window->KeyDown(VK_LEFT) && player->hasSideJump && !player->jumping && !player->waveDashing && !player->sideJumping)
+                if (window->KeyDown(VK_LEFT) && player->hasSideJump && !player->jumping && !player->jumping && !player->waveDashing && !player->sideJumping)
                 {
                     player->stopped = true;
                     if (player->hasDash)
@@ -145,7 +145,7 @@ void Platform::OnCollision(Object* obj)
                     }
                     player->Translate(0, -150 * gameTime);
                     player->sideJumping = false;
-                    if (window->KeyPress(VK_UP) || window->KeyPress('X') && !player->dashing) {
+                    if ((window->KeyPress(VK_UP) || window->KeyPress('X')) && !player->dashing) {
                         Everest::audio->Play(JUMP);
                         player->jumping = false;
                         player->MoveTo(x + platform->Width() / 2 + 25, player->Y(), Layer::MIDDLE);

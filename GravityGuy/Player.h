@@ -41,6 +41,7 @@ public:
     boolean onFloor;
 
     boolean isDead;
+    boolean playing;
 
     uint        gravity;                // gravidade atuando sobre o jogador
     int velX;

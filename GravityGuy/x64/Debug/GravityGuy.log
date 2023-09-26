@@ -1,10 +1,29 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: O diretório intermediário (x64\Debug\) contém arquivos compartilhados de outro projeto (GravityGuy.vcxproj). Isso pode levar a um comportamento incorreto de limpeza e recompilação.
+  Level1.cpp
   Level2.cpp
-C:\Users\caiod\OneDrive\Documentos\Everest\GravityGuy\Level2.cpp(43,39): warning C4305: 'argumento': truncamento de 'double' para 'float'
-C:\Users\caiod\OneDrive\Documentos\Everest\GravityGuy\Level2.cpp(60,17): warning C4101: 'posY': variável local não referenciada
-C:\Users\caiod\OneDrive\Documentos\Everest\GravityGuy\Level2.cpp(60,11): warning C4101: 'posX': variável local não referenciada
-C:\Users\caiod\OneDrive\Documentos\Everest\GravityGuy\Level2.cpp(61,11): warning C4101: 'platType': variável local não referenciada
-C:\Users\caiod\OneDrive\Documentos\Everest\GravityGuy\Level2.cpp(181,79): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
-C:\Users\caiod\OneDrive\Documentos\Everest\GravityGuy\Level2.cpp(181,57): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
-C:\Users\caiod\OneDrive\Documentos\Everest\GravityGuy\Level2.cpp(184,57): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
-  GravityGuy.vcxproj -> C:\Users\caiod\OneDrive\Documentos\Everest\x64\Debug\Everest.exe
+  Level3.cpp
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level1.cpp(59,17): warning C4101: 'posY': variável local não referenciada
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(43,39): warning C4305: 'argumento': truncamento de 'double' para 'float'
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level1.cpp(59,11): warning C4101: 'posX': variável local não referenciada
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level1.cpp(60,11): warning C4101: 'platType': variável local não referenciada
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level1.cpp(169,79): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level1.cpp(169,57): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level1.cpp(172,57): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(60,17): warning C4101: 'posY': variável local não referenciada
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(60,11): warning C4101: 'posX': variável local não referenciada
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(61,11): warning C4101: 'platType': variável local não referenciada
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(185,79): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(185,57): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level2.cpp(188,57): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level3.cpp(43,41): warning C4305: 'argumento': truncamento de 'double' para 'float'
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level3.cpp(43,37): warning C4305: 'argumento': truncamento de 'double' para 'float'
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level3.cpp(62,24): warning C4305: 'argumento': truncamento de 'double' para 'float'
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level3.cpp(62,20): warning C4305: 'argumento': truncamento de 'double' para 'float'
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level3.cpp(60,17): warning C4101: 'posY': variável local não referenciada
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level3.cpp(60,11): warning C4101: 'posX': variável local não referenciada
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level3.cpp(61,11): warning C4101: 'platType': variável local não referenciada
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level3.cpp(206,79): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level3.cpp(206,57): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Level3.cpp(209,57): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+  LINK : C:\Users\caiod\Desktop\Lab18\GravityGuy\x64\Debug\Everest.exe não encontrado ou não compilado pelo o último link incremental; executando link completo
+  GravityGuy.vcxproj -> C:\Users\caiod\Desktop\Lab18\GravityGuy\x64\Debug\Everest.exe

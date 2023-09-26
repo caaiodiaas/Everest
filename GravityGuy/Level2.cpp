@@ -170,7 +170,11 @@ void Level2::Init()
 
 void Level2::Update()
 {
-
+    if (Everest::player->playing == false)
+    {
+        font->Draw(55 + 55, 720 +10, "PRESSIONE", { 1,1,1,1 }, Layer::UPPER, 2);
+        font->Draw(55 + 75, 720 + 35, "ESPAÇO", { 1,1,1,1 }, Layer::UPPER, 2);
+    }
 
     if (Everest::player->isDead)
     {
@@ -189,8 +193,9 @@ void Level2::Update()
         Everest::player->deathCount++;
         Everest::player->Dead();
         Everest::player->MoveTo(55, 720, Layer::FRONT);
-        Everest::player->Reset();
-
+        Everest::player->isDead = false;
+        Everest::player->playing = false;
+        Everest::player->anim->Select(FALLINGRIGHT);
     }
 
     Color deathColor{ 0.65f, 0.65f, 0.65f, 1.0f };
