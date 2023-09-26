@@ -19,6 +19,7 @@
 #include "Sprite.h"                                     // desenho de sprites
 
 
+enum SPIKETYPES { LARGESPIKE, MEDIUMSPIKE, SMALLSPIKE, LARGESPIKEL, MEDIUMSPIKEL, SMALLSPIKEL, LARGESPIKER, MEDIUMSPIKER, SMALLSPIKER};
 // ---------------------------------------------------------------------------------
 
 class Spike : public Object

@@ -1,3 +1,2 @@
 ﻿  Player.cpp
-C:\Users\caiod\Desktop\Lab18\GravityGuy\GravityGuy\Player.cpp(73,48): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
   GravityGuy.vcxproj -> C:\Users\caiod\Desktop\Lab18\GravityGuy\x64\Debug\GravityGuy.exe

@@ -10,7 +10,7 @@
 **********************************************************************************/
 
 #include "Player.h"
-#include "GravityGuy.h"
+#include "Everest.h"
 #include "Platform.h"
 
 // ---------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ Player::Player()
 
     strawberryCount = 0;
 
-    type = 0;
+    type = 20;
 
     lastSide = 0;
 
@@ -167,7 +167,7 @@ void Player::Update()
     {
         if (!grabbing)
         {
-            GravityGuy::audio->Play(GRAB);
+            Everest::audio->Play(GRAB);
             grabbing = true;
         }
         grabbing = true;
@@ -194,7 +194,7 @@ void Player::Update()
 
     // atualiza animação
 
-    if (!jumping && !dashing && !waveDashing) {
+    if (!jumping && !dashing && !waveDashing && !sideJumping) {
         if (hasDash)
         {
             if (onFloor)
@@ -236,7 +236,7 @@ void Player::Update()
         }
     }
 
-    if (window->KeyDown(VK_RIGHT)) {
+    if (window->KeyDown(VK_RIGHT) && !dashing && !waveDashing) {
 
 
         lastSide = 0;
@@ -246,7 +246,7 @@ void Player::Update()
 
             if (((int)(100*walkTimer->Elapsed())%40 == 0) && !(anim->Frame() >= 39 && anim->Frame() <= 42))
             {
-                GravityGuy::audio->Play(WALK);
+                Everest::audio->Play(WALK);
             }
 
             anim->Select(WALKINGRIGHT);
@@ -263,7 +263,7 @@ void Player::Update()
 
     }
 
-    if (window->KeyDown(VK_LEFT)) {
+    if (window->KeyDown(VK_LEFT) && !dashing && !waveDashing) {
 
         lastSide = 1;
         Translate(-velX * gameTime, 0);
@@ -272,7 +272,7 @@ void Player::Update()
 
             if (((int)(100 * walkTimer->Elapsed()) % 40 == 0) && !(anim->Frame() >= 39 && anim->Frame() <= 42))
             {
-                GravityGuy::audio->Play(WALK);
+                Everest::audio->Play(WALK);
             }
             anim->Select(WALKINGLEFT);
         }
@@ -289,10 +289,9 @@ void Player::Update()
     }
 
 
-    if (hasDash && !dashing && window->KeyPress(VK_SPACE) && !waveDashing)
+    if (hasDash && !dashing && window->KeyPress(VK_SPACE) && !waveDashing && !stopped)
     {
-        GravityGuy::audio->Play(DASH);
-        MoveTo(x, y - 5, Layer::MIDDLE);
+        Everest::audio->Play(DASH);
         jumping = false;
         sideJumping = false;
         dashing = true;
@@ -330,7 +329,7 @@ void Player::Update()
 
     if (dashing) {
 
-        if (dashTimer->Elapsed() < 0.15f) {
+        if (dashTimer->Elapsed() < 0.15f || waveDashing) {
             switch (dashSide) {
             case 0: Translate(velX*4 * (1 - dashTimer->Elapsed()) * gameTime, -velY * (1 - dashTimer->Elapsed()) * gameTime, 0); anim->Select(DASHINGRIGHT); break; //RIGHT
             case 1: Translate(velX*3 * (1 - dashTimer->Elapsed()) * gameTime, -velY*3 * (1 - dashTimer->Elapsed()) * gameTime, 0); anim->Select(DASHINGRIGHT); break;//UP RIGHT
@@ -402,18 +401,19 @@ void Player::Update()
         if (waveDashTimer->Elapsed() < 0.3f) {
             if (dashSide == 7) {
                 anim->Select(DASHINGRIGHT);
-                Translate(velX * 4 * (0.5f - waveDashTimer->Elapsed()) * gameTime, -velY * 10 * (0.5f - waveDashTimer->Elapsed()) * gameTime);
+                Translate(velX  * (0.5f - waveDashTimer->Elapsed()) * gameTime, -velY * 8 * (0.5f - waveDashTimer->Elapsed()) * gameTime);
             }
 
             if (dashSide == 5) {
                 anim->Select(DASHINGLEFT);
-                Translate(-velX * 4 * (0.5f - waveDashTimer->Elapsed()) * gameTime, -velY * 10 * (0.5f - waveDashTimer->Elapsed()) * gameTime);
+                Translate(-velX  * (0.5f - waveDashTimer->Elapsed()) * gameTime, -velY * 8 * (0.5f - waveDashTimer->Elapsed()) * gameTime);
             }
                 
         }
         else {
             waveDashTimer->Stop();
             waveDashTimer->Reset();
+            hasDash = true;
             waveDashing = false;
         }
     }
@@ -458,6 +458,8 @@ void Player::Update()
         }
     }
 
+
+    stopped = false;
     onFloor = false;
 
     anim->NextFrame();

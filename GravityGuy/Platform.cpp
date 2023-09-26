@@ -11,7 +11,7 @@
 
 #include "Platform.h"
 #include "Player.h"
-#include "GravityGuy.h"
+#include "Everest.h"
 
 // ---------------------------------------------------------------------------------
 
@@ -19,17 +19,19 @@ Platform::Platform(float posX, float posY, uint platType, Color tint) : color(ti
 {
     switch (platType)
     {
-    case SMALL:  platform = new Sprite("Resources/SmallGray.png"); type = SMALL; break;
-    case MEDIUM: platform = new Sprite("Resources/MediumGray.png"); type = MEDIUM; break;
-    case LARGE:  platform = new Sprite("Resources/LongGray.png"); type = LARGE; break;
-    case FINISH: platform = new Sprite("Resources/LongGrayV.png"); type = FINISH; break;
+    case LARGE:  platform = new Sprite("Resources/LongHorizontal.png"); type = LARGE; break;
+    case MEDIUM: platform = new Sprite("Resources/MediumHorizontal.png"); type = MEDIUM; break;
+    case SMALL:  platform = new Sprite("Resources/SmallHorizontal.png"); type = SMALL; break;
+    case LARGEV:  platform = new Sprite("Resources/LongVertical.png"); type = LARGEV; break;
+    case MEDIUMV: platform = new Sprite("Resources/MediumVertical.png"); type = MEDIUMV; break;
+    case SMALLV:  platform = new Sprite("Resources/LongVertical.png"); type = SMALLV; break;
     }
 
 
-        BBox(new Rect(-platform->Width() / 2.0f,
-            -platform->Height() / 2.0f,
-            platform->Width() / 2.0f,
-            platform->Height() / 2.0f));
+        BBox(new Rect(( - platform->Width()) / 2.0f,
+            (- platform->Height()) / 2.0f,
+            (platform->Width()) / 2.0f,
+            (platform->Height()) / 2.0f));
 
 
     MoveTo(posX, posY, Layer::MIDDLE);
@@ -53,30 +55,37 @@ void Platform::Update()
 
 void Platform::OnCollision(Object* obj)
 {
-    if (obj->Type() == 0)
+    if (obj->Type() == 20)
     {
         Player* player = (Player*)obj;
 
         // Colisões eixo X
 
         //Plataforma na direita
-        if (player->X() + 5 < x - platform->Width() / 2 + 10) {
-            if (player->Y() + 15 < y - platform->Height() / 2)
+        if (player->X() < x - platform->Width() / 2) {
+            if (player->Y() + 15 < y - platform->Height() / 2 && !window->KeyDown(VK_DOWN))
             {
                 player->MoveTo(x - platform->Width() / 2 - 5, player->Y(), Layer::MIDDLE);
             }
             else {
 
-                if(window->KeyDown(VK_RIGHT))
+                if(window->KeyDown(VK_RIGHT) && !player->waveDashing)
                 player->MoveTo(x - platform->Width() / 2 - 15, player->Y(), Layer::MIDDLE);
             }
 
-            if (player->dashing)
+            if (player->dashing && (player->dashSide == 0 || player->dashSide == 1 || player->dashSide == 7) && player->Y() > y - platform->Height() / 2)
             {
                 player->velX = 0;
             }
-            if (window->KeyDown(VK_RIGHT) && player->hasSideJump && !player->jumping)
+
+            if (player->sideJumping)
             {
+                player->sideJumping = false;
+            }
+
+            if (window->KeyDown(VK_RIGHT) && player->hasSideJump && !player->jumping && !player->waveDashing && !player->sideJumping)
+            {
+                player->stopped = true;
                 if (player->hasDash)
                 {
                     player->anim->Select(GRABINGRIGHT);
@@ -87,7 +96,7 @@ void Platform::OnCollision(Object* obj)
                 player->Translate(0, -150 * gameTime);
                 player->sideJumping = false;
                 if (window->KeyPress(VK_UP) && !player->dashing) {
-                    GravityGuy::audio->Play(JUMP);
+                    Everest::audio->Play(JUMP);
                     player->jumping = false;
                     player->MoveTo(x - platform->Width() / 2 - 25, player->Y(), Layer::MIDDLE);
                     player->sideJumping = true;
@@ -102,22 +111,31 @@ void Platform::OnCollision(Object* obj)
         else
 
             //Plataforma na esquerda
-            if (player->X() - 5 > x + platform->Width() / 2 -10) {
-                if (player->Y() + 15 < y - platform->Height() / 2)
+            if (player->X() > x + platform->Width() / 2) {
+                if ((player->Y() + 15 < y - platform->Height() / 2) && !window->KeyDown(VK_DOWN))
                 {
                     player->MoveTo(x + platform->Width() / 2 + 5, player->Y(), Layer::MIDDLE);
                 }
                 else {
-                    if (window->KeyDown(VK_LEFT))
+                    if (window->KeyDown(VK_LEFT) && !player->waveDashing)
                     player->MoveTo(x + platform->Width() / 2 + 15, player->Y(), Layer::MIDDLE);
                 }
 
-                if (player->dashing)
+                if (player->dashing && (player->dashSide == 3 || player->dashSide == 4 || player->dashSide == 5) && player->Y() > y - platform->Height() / 2)
                 {
                     player->velX = 0;
                 }
-                if (window->KeyDown(VK_LEFT) && player->hasSideJump && !player->jumping)
+
+                if (player->sideJumping)
                 {
+                    player->sideJumping = false;
+                    player->sideJumpTimer->Stop();
+                    player->sideJumpTimer->Reset();
+                }
+
+                if (window->KeyDown(VK_LEFT) && player->hasSideJump && !player->jumping && !player->waveDashing && !player->sideJumping)
+                {
+                    player->stopped = true;
                     if (player->hasDash)
                     {
                         player->anim->Select(GRABINGLEFT);
@@ -128,7 +146,7 @@ void Platform::OnCollision(Object* obj)
                     player->Translate(0, -150 * gameTime);
                     player->sideJumping = false;
                     if (window->KeyPress(VK_UP) && !player->dashing) {
-                        GravityGuy::audio->Play(JUMP);
+                        Everest::audio->Play(JUMP);
                         player->jumping = false;
                         player->MoveTo(x + platform->Width() / 2 + 25, player->Y(), Layer::MIDDLE);
                         player->sideJumping = true;
@@ -143,7 +161,7 @@ void Platform::OnCollision(Object* obj)
                 // Colisões eixo Y
                     //Plataforma abaixo
                 if (player->Y() < y - platform->Height() / 2) {
-                    player->MoveTo(player->X(), y - platform->Height() / 2 - 20, Layer::MIDDLE);
+                    player->MoveTo(player->X(), y - platform->Height() / 2 - 25, Layer::MIDDLE);
 
                     if (player->X() > x - platform->Width() / 2 && player->X() < x + platform->Width() / 2 || player->X() < x + platform->Width() / 2 && player->X() > x - platform->Width() / 2)
                     {
@@ -154,21 +172,19 @@ void Platform::OnCollision(Object* obj)
                         player->onFloor = true;
                     }
 
-                    if (player->dashing && player->dashSide == 7 || player->dashSide == 5)
+                    if (player->dashSide == 7 || player->dashSide == 5)
                     {
                         if (window->KeyDown(VK_SPACE)) {
-                            GravityGuy::audio->Play(JUMP);
-                            player->MoveTo(player->X(), y - platform->Height() / 2 - 25, Layer::MIDDLE);
-                            player->hasDash = true;
+                            player->velX = 200;
+                            Everest::audio->Play(JUMP);
+                            player->MoveTo(player->X(), y - platform->Height() / 2 - 35, Layer::MIDDLE);
                             player->waveDashing = true;
                         }
-
-
                     }
                     else if (window->KeyPress(VK_UP)) {
                         if (player->X() > x - platform->Width() / 2 && player->X() < x + platform->Width() / 2 || player->X() < x + platform->Width() / 2 && player->X() > x - platform->Width() / 2)
                         {
-                            GravityGuy::audio->Play(JUMP);
+                            Everest::audio->Play(JUMP);
                             player->MoveTo(player->X(), y - platform->Height() / 2 - 25, Layer::MIDDLE);
                             player->jumping = true;
                             player->jumpTimer->Start();

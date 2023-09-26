@@ -55,6 +55,7 @@ public:
     Timer* waveDashTimer;
 
     boolean grabbing;
+    boolean stopped;
 
     boolean hasSideJump;
     boolean sideJumping;
