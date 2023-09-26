@@ -169,8 +169,11 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="Level1B.cpp" />
     <ClCompile Include="Level2.cpp" />
+    <ClCompile Include="Level2B.cpp" />
     <ClCompile Include="Level3.cpp" />
+    <ClCompile Include="Level3B.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Platform.cpp" />
@@ -202,8 +205,11 @@
     <ClInclude Include="Image.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Level1.h" />
+    <ClInclude Include="Level1B.h" />
     <ClInclude Include="Level2.h" />
+    <ClInclude Include="Level2B.h" />
     <ClInclude Include="Level3.h" />
+    <ClInclude Include="Level3B.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Platform.h" />

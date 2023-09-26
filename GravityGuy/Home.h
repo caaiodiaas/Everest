@@ -40,6 +40,7 @@ private:
     Animation* anim = nullptr;     // animação do menu
     Mouse* mouse = nullptr;
     bool start;
+    bool startB;
     bool exists;
     TileSet* tutorial = nullptr;
     Animation* Tutorialanim = nullptr;

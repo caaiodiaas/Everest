@@ -1,5 +1,5 @@
 /**********************************************************************************
-// Level2 (Código Fonte)
+// Level3B (Código Fonte)
 //
 // Criação:     14 Fev 2013
 // Atualização: 04 Set 2023
@@ -11,8 +11,8 @@
 
 #include "Everest.h"
 #include "Home.h"
-#include "Level2.h"
-#include "Level2.h"
+#include "Level3B.h"
+#include "Level3B.h"
 #include "GameOver.h"
 #include "Player.h"
 #include "Platform.h"
@@ -22,32 +22,32 @@
 #include <fstream>
 #include "Spike.h"
 #include "Strawberry.h"
-#include "Level3.h"
+#include "Level3B.h"
 using std::ifstream;
 using std::string;
 
 // ------------------------------------------------------------------------------
 // Inicializa membros estáticos da classe
 
-Scene* Level2::scene = nullptr;
-Font* Level2::font = nullptr;            // fonte para texto
+Scene* Level3B::scene = nullptr;
+Font* Level3B::font = nullptr;            // fonte para texto
 
 // ------------------------------------------------------------------------------
 
-void Level2::Init()
+void Level3B::Init()
 {
     // cria gerenciador de cena
     scene = new Scene();
 
     // pano de fundo do jogo
-    backg = new Background(Color{ 1,1,0.6,1 });
+    backg = new Background(Color{ 1,0.6,0.6,1 });
     scene->Add(backg, STATIC);
 
     // adiciona jogador na cena
     scene->Add(Everest::player, MOVING);
 
     // adiciona jogador na cena
-    strawberry = new Strawberry(680, 300);
+    strawberry = new Strawberry(650, 80);
     scene->Add(strawberry, MOVING);
 
 
@@ -59,7 +59,7 @@ void Level2::Init()
     Spike* spike;
     float posX, posY;
     uint  platType;
-    Color white{ 1,1,0.9f,1 };
+    Color white{ 1,0.9,0.9,1 };
 
     // cria fontes para exibição de texto
     font = new Font("Resources/Tahoma14.png");
@@ -67,109 +67,135 @@ void Level2::Init()
 
     //PARTE ESQUERDA
 
-
-
-    spike = new Spike(221, 170, SMALLSPIKE, white);
+    spike = new Spike(118, 257, LARGESPIKE, white);
     scene->Add(spike, STATIC);
 
-    plat = new Platform(118, 780, MEDIUM, white);
-    scene->Add(plat, STATIC);
-
-    plat = new Platform(256, 746, SMALLV, white);
-    scene->Add(plat, STATIC);
-
-    plat = new Platform(71, 654, SMALL, white);
-    scene->Add(plat, STATIC);
-
-    plat = new Platform(20, 410, LARGEV, white);
-    scene->Add(plat, STATIC);
-
-    plat = new Platform(26, 166, SMALL, white);
-    scene->Add(plat, STATIC);
-
-    plat = new Platform(156, -38, LARGEV, white);
-    scene->Add(plat, STATIC);
-
-    plat = new Platform(214, 206, MEDIUM, white);
-    scene->Add(plat, STATIC);
-
-    plat = new Platform(400, 20, LARGE, white);
-    scene->Add(plat, STATIC);
-
-
-    // PARTE CENTRAL
-
-    spike = new Spike(345, 679, LARGESPIKER, white);
+    spike = new Spike(325, 257, MEDIUMSPIKE, white);
     scene->Add(spike, STATIC);
 
-    spike = new Spike(408, 501, SMALLSPIKE, white);
+    spike = new Spike(56, 395, MEDIUMSPIKEL, white);
     scene->Add(spike, STATIC);
 
-    plat = new Platform(212, 490, SMALL, white);
+    spike = new Spike(86, 745, SMALLSPIKE, white);
+    scene->Add(spike, STATIC);
+
+    spike = new Spike(208, 703, SMALLSPIKER, white);
+    scene->Add(spike, STATIC);
+
+    spike = new Spike(278, 735, SMALLSPIKEL, white);
+    scene->Add(spike, STATIC);
+
+
+    plat = new Platform(71, 151, SMALL, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(212, 413, SMALLV, white);
+    plat = new Platform(419, 180, SMALL, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(262, 340, SMALL, white);
+    plat = new Platform(224, 292, LARGE, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(383, 780, LARGEV, white);
+    plat = new Platform(20, 536, LARGEV, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(423, 780, LARGEV, white);
+    plat = new Platform(224, 780, LARGE, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(434, 536, SMALL, white);
+    plat = new Platform(243, 703, SMALLV, white);
     scene->Add(plat, STATIC);
+
+
+    //PARTE CENTRAL
+
+    spike = new Spike(219, 0, SMALLSPIKER, white);
+    scene->Add(spike, STATIC);
+
+    spike = new Spike(585, 185, SMALLSPIKE, white);
+    scene->Add(spike, STATIC);
+
+    spike = new Spike(501, 618, SMALLSPIKE, white);
+    scene->Add(spike, STATIC);
+
+    spike = new Spike(375, 573, SMALLSPIKER, white);
+    scene->Add(spike, STATIC);
+
+    spike = new Spike(341, 461, SMALLSPIKE, white);
+    scene->Add(spike, STATIC);
+
+    spike = new Spike(203, 461, SMALLSPIKE, white);
+    scene->Add(spike, STATIC);
+
+
+    plat = new Platform(254, -93, LARGEV, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(585, 40, SMALLV, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(701, 82, MEDIUMV, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(498, 20, LARGE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(591, 449, LARGEV, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(760, 221, LARGE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(501, 653, SMALL, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(410, 555, MEDIUMV, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(272, 494, MEDIUM, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(272, 452, SMALLV, white);
+    scene->Add(plat, STATIC);
+
 
     //PARTE DIREITA
 
-    spike = new Spike(745, 63, SMALLSPIKER, white);
+    spike = new Spike(800, 340, SMALLSPIKE, white);
     scene->Add(spike, STATIC);
 
-    spike = new Spike(745, 330, LARGESPIKER, white);
-    scene->Add(spike, STATIC);
 
-    plat = new Platform(523, 297, SMALLV, white);
+    plat = new Platform(780, 576, LARGEV, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(604, 212, SMALLV, white);
+    plat = new Platform(772, 780, SMALL, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(554, 250, MEDIUM, white);
+    plat = new Platform(772, 653, SMALL, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(642, 135, MEDIUM, white);
+    plat = new Platform(632, 551, SMALLV, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(780, 224, LARGEV, white);
+    plat = new Platform(753, 375, SMALL, white);
     scene->Add(plat, STATIC);
-
-    plat = new Platform(682, 468, LARGE, white);
-    scene->Add(plat, STATIC);
-
-
-
     // ----------------------
 
     // inicia com música
 
-    Everest::audio->Volume(MUSIC2, 0.1f);
-    Everest::audio->Frequency(MUSIC2, 1);
-    Everest::audio->Play(MUSIC2, 1);
+    Everest::audio->Volume(MUSIC3, 0.1f);
+    Everest::audio->Frequency(MUSIC3, 1.1f);
+    Everest::audio->Play(MUSIC3, 1);
     Everest::audio->Play(WIND, 1);
-    Everest::player->MoveTo(55, 720, Layer::FRONT);
+    Everest::player->MoveTo(70, 100, Layer::FRONT);
 }
 
 // ------------------------------------------------------------------------------
 
-void Level2::Update()
+void Level3B::Update()
 {
     if (Everest::player->playing == false)
     {
-        font->Draw(55 + 55, 720 +10, "PRESSIONE", { 1,1,1,1 }, Layer::UPPER, 2);
-        font->Draw(55 + 75, 720 + 35, "ESPAÇO", { 1,1,1,1 }, Layer::UPPER, 2);
+        font->Draw(70 + 55, 100 + 10, "PRESSIONE", { 1,1,1,1 }, Layer::UPPER, 2);
+        font->Draw(70 + 75, 100 + 35, "ESPAÇO", { 1,1,1,1 }, Layer::UPPER, 2);
     }
 
     if (Everest::player->isDead)
@@ -188,10 +214,11 @@ void Level2::Update()
         strawberry->Reset();
         Everest::player->deathCount++;
         Everest::player->Dead();
-        Everest::player->MoveTo(55, 720, Layer::FRONT);
+        Everest::player->MoveTo(70, 100, Layer::FRONT);
         Everest::player->isDead = false;
         Everest::player->playing = false;
         Everest::player->anim->Select(FALLINGRIGHT);
+
     }
 
     Color deathColor{ 0.65f, 0.65f, 0.65f, 1.0f };
@@ -206,7 +233,7 @@ void Level2::Update()
 
     if (window->KeyPress(VK_ESCAPE))
     {
-        Everest::audio->Stop(MUSIC2);
+        Everest::audio->Stop(MUSIC3);
         Everest::audio->Stop(WIND);
         Everest::NextLevel<Home>();
         Everest::player->Reset();
@@ -215,9 +242,9 @@ void Level2::Update()
     {
         Everest::player->isDead = true;
     }
-    else if (Everest::player->Y() < 0 || window->KeyPress('N'))
+    else if (Everest::player->Right() > window->Width() || window->KeyPress('N'))
     {
-        Everest::player->MoveTo(55, 720, Layer::FRONT);
+        Everest::player->MoveTo(70, 100, Layer::FRONT);
         Everest::player->Reset();
         if (strawberry->following)
         {
@@ -225,8 +252,8 @@ void Level2::Update()
             strawberry->Reset();
         }
         Everest::audio->Stop(WIND);
-        Everest::audio->Stop(MUSIC2);
-        Everest::NextLevel<Level3>();
+        Everest::audio->Stop(MUSIC3);
+        Everest::NextLevel<GameOver>();
     }
     else
     {
@@ -239,7 +266,7 @@ void Level2::Update()
 
 // ------------------------------------------------------------------------------
 
-void Level2::Draw()
+void Level3B::Draw()
 {
     backg->Draw();
     scene->Draw();
@@ -250,7 +277,7 @@ void Level2::Draw()
 
 // ------------------------------------------------------------------------------
 
-void Level2::Finalize()
+void Level3B::Finalize()
 {
     scene->Remove(Everest::player, MOVING);
     delete scene;

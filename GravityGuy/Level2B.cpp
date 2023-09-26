@@ -1,5 +1,5 @@
 /**********************************************************************************
-// Level2 (Código Fonte)
+// Level2B (Código Fonte)
 //
 // Criação:     14 Fev 2013
 // Atualização: 04 Set 2023
@@ -11,8 +11,8 @@
 
 #include "Everest.h"
 #include "Home.h"
-#include "Level2.h"
-#include "Level2.h"
+#include "Level2B.h"
+#include "Level2B.h"
 #include "GameOver.h"
 #include "Player.h"
 #include "Platform.h"
@@ -23,18 +23,19 @@
 #include "Spike.h"
 #include "Strawberry.h"
 #include "Level3.h"
+#include "Level3B.h"
 using std::ifstream;
 using std::string;
 
 // ------------------------------------------------------------------------------
 // Inicializa membros estáticos da classe
 
-Scene* Level2::scene = nullptr;
-Font* Level2::font = nullptr;            // fonte para texto
+Scene* Level2B::scene = nullptr;
+Font* Level2B::font = nullptr;            // fonte para texto
 
 // ------------------------------------------------------------------------------
 
-void Level2::Init()
+void Level2B::Init()
 {
     // cria gerenciador de cena
     scene = new Scene();
@@ -47,7 +48,7 @@ void Level2::Init()
     scene->Add(Everest::player, MOVING);
 
     // adiciona jogador na cena
-    strawberry = new Strawberry(680, 300);
+    strawberry = new Strawberry(680, 280);
     scene->Add(strawberry, MOVING);
 
 
@@ -75,9 +76,6 @@ void Level2::Init()
     plat = new Platform(118, 780, MEDIUM, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(256, 746, SMALLV, white);
-    scene->Add(plat, STATIC);
-
     plat = new Platform(71, 654, SMALL, white);
     scene->Add(plat, STATIC);
 
@@ -98,6 +96,9 @@ void Level2::Init()
 
 
     // PARTE CENTRAL
+
+    spike = new Spike(221, 170, SMALLSPIKE, white);
+    scene->Add(spike, STATIC);
 
     spike = new Spike(345, 679, LARGESPIKER, white);
     scene->Add(spike, STATIC);
@@ -137,7 +138,7 @@ void Level2::Init()
     plat = new Platform(604, 212, SMALLV, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(554, 250, MEDIUM, white);
+    plat = new Platform(554, 250, SMALL, white);
     scene->Add(plat, STATIC);
 
     plat = new Platform(642, 135, MEDIUM, white);
@@ -146,8 +147,13 @@ void Level2::Init()
     plat = new Platform(780, 224, LARGEV, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(682, 468, LARGE, white);
+    plat = new Platform(682, 468, MEDIUM, white);
     scene->Add(plat, STATIC);
+
+
+    //ESPINHO DE FUNDO
+    spike = new Spike(55, 620, SMALLSPIKEL, white);
+    scene->Add(spike, STATIC);
 
 
 
@@ -156,7 +162,7 @@ void Level2::Init()
     // inicia com música
 
     Everest::audio->Volume(MUSIC2, 0.1f);
-    Everest::audio->Frequency(MUSIC2, 1);
+    Everest::audio->Frequency(MUSIC2, 1.1f);
     Everest::audio->Play(MUSIC2, 1);
     Everest::audio->Play(WIND, 1);
     Everest::player->MoveTo(55, 720, Layer::FRONT);
@@ -164,11 +170,11 @@ void Level2::Init()
 
 // ------------------------------------------------------------------------------
 
-void Level2::Update()
+void Level2B::Update()
 {
     if (Everest::player->playing == false)
     {
-        font->Draw(55 + 55, 720 +10, "PRESSIONE", { 1,1,1,1 }, Layer::UPPER, 2);
+        font->Draw(55 + 55, 720 + 10, "PRESSIONE", { 1,1,1,1 }, Layer::UPPER, 2);
         font->Draw(55 + 75, 720 + 35, "ESPAÇO", { 1,1,1,1 }, Layer::UPPER, 2);
     }
 
@@ -226,7 +232,7 @@ void Level2::Update()
         }
         Everest::audio->Stop(WIND);
         Everest::audio->Stop(MUSIC2);
-        Everest::NextLevel<Level3>();
+        Everest::NextLevel<Level3B>();
     }
     else
     {
@@ -239,7 +245,7 @@ void Level2::Update()
 
 // ------------------------------------------------------------------------------
 
-void Level2::Draw()
+void Level2B::Draw()
 {
     backg->Draw();
     scene->Draw();
@@ -250,7 +256,7 @@ void Level2::Draw()
 
 // ------------------------------------------------------------------------------
 
-void Level2::Finalize()
+void Level2B::Finalize()
 {
     scene->Remove(Everest::player, MOVING);
     delete scene;

@@ -15,12 +15,12 @@
 #include "Level1.h"
 #include "Item.h"
 #include "Mouse.h"
+#include "Level1B.h"
 
 // ------------------------------------------------------------------------------
 
 void Home::Init()
 {
-    bool start = false;
     scene = new Scene();
     backg = new TileSet("Resources/Home.png", 800, 800, 2, 4);
     //tileset = new TileSet("Resources/PressEnter.png", 72, 48, 1, 5);
@@ -48,6 +48,9 @@ void Home::Init()
 
     Everest::audio->Volume(MENU, 0.2f);
     Everest::audio->Play(MENU, true);
+
+    startB = false;
+    start = false;
 }
 
 // ------------------------------------------------------------------------------
@@ -100,6 +103,11 @@ void Home::Update()
                     window->Close(); 
                     break;
                 }
+                case TUTORIALKEY:
+                {
+                    startB = true;
+                    break;
+                }
                 }
             }
         }
@@ -117,6 +125,11 @@ void Home::Update()
     if (start) {
         Everest::audio->Stop(MENU);
         Everest::NextLevel<Level1>();
+    }
+
+    if (startB) {
+        Everest::audio->Stop(MENU);
+        Everest::NextLevel<Level1B>();
     }
 }
 

@@ -81,9 +81,6 @@ void Level1::Init()
     plat = new Platform(111, 592, SMALL, white);
     scene->Add(plat, STATIC);
 
-    spike = new Spike(85, 557, SMALLSPIKE, white);
-    scene->Add(spike, STATIC);
-
     spike = new Spike(346, 597, SMALLSPIKE, white);
     scene->Add(spike, STATIC);
 
@@ -98,7 +95,7 @@ void Level1::Init()
     plat = new Platform(342, 428, MEDIUM, white);
     scene->Add(plat, STATIC);
 
-    spike = new Spike(341, 157, MEDIUMSPIKE, white);
+    spike = new Spike(341, 157, SMALLSPIKE, white);
     scene->Add(spike, STATIC);
 
     spike = new Spike(171, 296, LARGESPIKER, white);
@@ -106,16 +103,16 @@ void Level1::Init()
 
 
     // PARTE DIREITA
-    plat = new Platform(681, 780, MEDIUM, white);
+    plat = new Platform(681, 780, LARGE, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(778, 536, LARGEV, white);
+    plat = new Platform(778, 626, LARGEV, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(778, 638, SMALL, white);
+    plat = new Platform(778, 678, SMALL, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(778, 474, SMALL, white);
+    plat = new Platform(778, 544, SMALL, white);
     scene->Add(plat, STATIC);
 
 
@@ -135,8 +132,6 @@ void Level1::Init()
     spike = new Spike(636, 157, MEDIUMSPIKE, white);
     scene->Add(spike, STATIC);
 
-    spike = new Spike(568, 494, LARGESPIKER, white);
-    scene->Add(spike, STATIC);
 
 
 
@@ -145,6 +140,7 @@ void Level1::Init()
     // inicia com música
 
     Everest::audio->Volume(MUSIC1, 0.1f);
+    Everest::audio->Frequency(MUSIC1, 1);
     Everest::audio->Play(MUSIC1,1);
     Everest::audio->Play(WIND, 1);
     Everest::player->MoveTo(70, 80, Layer::FRONT);

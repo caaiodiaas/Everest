@@ -73,18 +73,11 @@ void Level3::Init()
     spike = new Spike(325, 257, MEDIUMSPIKE, white);
     scene->Add(spike, STATIC);
 
-    spike = new Spike(56, 395, MEDIUMSPIKEL, white);
-    scene->Add(spike, STATIC);
-
     spike = new Spike(86, 745, SMALLSPIKE, white);
-    scene->Add(spike, STATIC);
-
-    spike = new Spike(208, 703, SMALLSPIKER, white);
     scene->Add(spike, STATIC);
 
     spike = new Spike(278, 735, SMALLSPIKEL, white);
     scene->Add(spike, STATIC);
-
 
     plat = new Platform(71, 151, SMALL, white);
     scene->Add(plat, STATIC);
@@ -107,8 +100,6 @@ void Level3::Init()
 
     //PARTE CENTRAL
 
-    spike = new Spike(219, 0, SMALLSPIKER, white);
-    scene->Add(spike, STATIC);
 
     spike = new Spike(585, 185, SMALLSPIKE, white);
     scene->Add(spike, STATIC);
@@ -119,18 +110,8 @@ void Level3::Init()
     spike = new Spike(375, 573, SMALLSPIKER, white);
     scene->Add(spike, STATIC);
 
-    spike = new Spike(341, 461, SMALLSPIKE, white);
-    scene->Add(spike, STATIC);
-
     spike = new Spike(203, 461, SMALLSPIKE, white);
     scene->Add(spike, STATIC);
-
-
-    plat = new Platform(254, -93, LARGEV, white);
-    scene->Add(plat, STATIC);
-
-    plat = new Platform(585, 40, SMALLV, white);
-    scene->Add(plat, STATIC);
 
     plat = new Platform(701, 82, MEDIUMV, white);
     scene->Add(plat, STATIC);
@@ -159,29 +140,26 @@ void Level3::Init()
 
     //PARTE DIREITA
 
-    spike = new Spike(800, 340, SMALLSPIKE, white);
-    scene->Add(spike, STATIC);
-
-
     plat = new Platform(780, 576, LARGEV, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(772, 780, SMALL, white);
+    plat = new Platform(772, 780, LARGE, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(772, 653, SMALL, white);
+    plat = new Platform(772, 673, SMALL, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(632, 551, SMALLV, white);
+    plat = new Platform(632, 571, SMALLV, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(753, 375, SMALL, white);
+    plat = new Platform(753, 395, SMALL, white);
     scene->Add(plat, STATIC);
     // ----------------------
 
     // inicia com música
 
     Everest::audio->Volume(MUSIC3, 0.1f);
+    Everest::audio->Frequency(MUSIC3, 1);
     Everest::audio->Play(MUSIC3, 1);
     Everest::audio->Play(WIND, 1);
     Everest::player->MoveTo(70, 100, Layer::FRONT);
