@@ -292,7 +292,7 @@ void Player::Update()
     }
 
 
-    if (hasDash && !dashing && window->KeyPress(VK_SPACE) || window->KeyPress('Z') && !waveDashing && !stopped)
+    if (hasDash && !dashing && (window->KeyPress(VK_SPACE) || window->KeyPress('Z')) && !waveDashing && !stopped)
     {
         Everest::audio->Play(DASH);
         jumping = false;
@@ -300,21 +300,21 @@ void Player::Update()
         dashing = true;
         hasDash = false;
         dashTimer->Start();
-        if (window->KeyDown(VK_LEFT) && window->KeyDown(VK_UP) || window->KeyDown('X') || window->KeyDown('X'))
+        if (window->KeyDown(VK_LEFT) && window->KeyDown(VK_UP))
         {
             dashSide = 3;
         }
         else if (window->KeyDown(VK_LEFT) && !window->KeyDown(VK_DOWN))
         {
             dashSide = 4;
-        }else if (window->KeyDown(VK_RIGHT) && window->KeyDown(VK_UP) || window->KeyDown('X') || window->KeyDown('X'))
+        }else if (window->KeyDown(VK_RIGHT) && window->KeyDown(VK_UP))
         {
             dashSide = 1;
         }
         else if (window->KeyDown(VK_RIGHT) && !window->KeyDown(VK_DOWN))
         {
             dashSide = 0;
-        }else if (window->KeyDown(VK_UP) || window->KeyDown('X') || window->KeyDown('X') && !window->KeyDown(VK_RIGHT) && !window->KeyDown(VK_LEFT))
+        }else if (window->KeyDown(VK_UP) && !window->KeyDown(VK_RIGHT) && !window->KeyDown(VK_LEFT))
         {
             dashSide = 2;
         }

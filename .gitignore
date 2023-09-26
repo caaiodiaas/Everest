@@ -37,3 +37,5 @@
 *.recipe
 *.pdb
 *.idb
+*.ipch
+*.db

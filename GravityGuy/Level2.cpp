@@ -102,6 +102,9 @@ void Level2::Init()
     spike = new Spike(345, 679, LARGESPIKER, white);
     scene->Add(spike, STATIC);
 
+    spike = new Spike(408, 501, SMALLSPIKE, white);
+    scene->Add(spike, STATIC);
+
     plat = new Platform(212, 490, SMALL, white);
     scene->Add(plat, STATIC);
 
