@@ -94,7 +94,7 @@ Player::Player()
 
     strawberryCount = 0;
 
-    type = 0;
+    type = 20;
 
     lastSide = 0;
 
@@ -194,7 +194,7 @@ void Player::Update()
 
     // atualiza animação
 
-    if (!jumping && !dashing && !waveDashing) {
+    if (!jumping && !dashing && !waveDashing && !sideJumping) {
         if (hasDash)
         {
             if (onFloor)

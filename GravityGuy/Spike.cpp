@@ -60,7 +60,7 @@ void Spike::Update()
 
 void Spike::OnCollision(Object* obj)
 {
-    if (obj->Type() == 0)
+    if (obj->Type() == 20)
     {
         Player* player = (Player*)obj;
         player->isDead = true;

@@ -61,7 +61,7 @@ void Strawberry::Reset()
 
 void Strawberry::OnCollision(Object* obj)
 {
-    if (obj->Type() == 0) {
+    if (obj->Type() == 20) {
         if (!following)
         {
             Everest::audio->Play(STRAWBERRY);

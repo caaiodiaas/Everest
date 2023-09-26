@@ -28,9 +28,9 @@ Platform::Platform(float posX, float posY, uint platType, Color tint) : color(ti
     }
 
 
-        BBox(new Rect(( - platform->Width()-10) / 2.0f,
+        BBox(new Rect(( - platform->Width()) / 2.0f,
             (- platform->Height()) / 2.0f,
-            (platform->Width()+10) / 2.0f,
+            (platform->Width()) / 2.0f,
             (platform->Height()) / 2.0f));
 
 
@@ -55,7 +55,7 @@ void Platform::Update()
 
 void Platform::OnCollision(Object* obj)
 {
-    if (obj->Type() == 0)
+    if (obj->Type() == 20)
     {
         Player* player = (Player*)obj;
 
@@ -77,7 +77,13 @@ void Platform::OnCollision(Object* obj)
             {
                 player->velX = 0;
             }
-            if (window->KeyDown(VK_RIGHT) && player->hasSideJump && !player->jumping && !player->waveDashing)
+
+            if (player->sideJumping)
+            {
+                player->sideJumping = false;
+            }
+
+            if (window->KeyDown(VK_RIGHT) && player->hasSideJump && !player->jumping && !player->waveDashing && !player->sideJumping)
             {
                 player->stopped = true;
                 if (player->hasDash)
@@ -119,7 +125,15 @@ void Platform::OnCollision(Object* obj)
                 {
                     player->velX = 0;
                 }
-                if (window->KeyDown(VK_LEFT) && player->hasSideJump && !player->jumping && !player->waveDashing)
+
+                if (player->sideJumping)
+                {
+                    player->sideJumping = false;
+                    player->sideJumpTimer->Stop();
+                    player->sideJumpTimer->Reset();
+                }
+
+                if (window->KeyDown(VK_LEFT) && player->hasSideJump && !player->jumping && !player->waveDashing && !player->sideJumping)
                 {
                     player->stopped = true;
                     if (player->hasDash)

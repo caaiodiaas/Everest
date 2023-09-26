@@ -54,8 +54,7 @@ void Home::Update()
     // se a tecla ENTER for pressionada
     if (window->KeyPress(VK_RETURN))
     {
-        Everest::audio->Stop(MENU);
-        Everest::NextLevel<Level1>();
+        start = true;
     }
     else
     {

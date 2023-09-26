@@ -46,7 +46,7 @@ void Level1::Init()
     scene->Add(Everest::player, MOVING);
 
     // adiciona jogador na cena
-    strawberry = new Strawberry(90, 520);
+    strawberry = new Strawberry(100, 500);
     scene->Add(strawberry, MOVING);
 
 
@@ -64,34 +64,78 @@ void Level1::Init()
     font = new Font("Resources/Tahoma14.png");
     font->Spacing("Resources/Tahoma14.dat");
 
-    plat = new Platform(20, -99, LARGEV, white);
+    //PARTE ESQUERDA
+
+    plat = new Platform(20, -100, LARGEV, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(71, 145, SMALL, white);
+    plat = new Platform(73, 144, SMALL, white);
     scene->Add(plat, STATIC);
 
     plat = new Platform(20, 388, LARGEV, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(223, 630, LARGE, white);
+    plat = new Platform(224, 632, LARGE, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(110, 590, SMALL, white);
+    plat = new Platform(111, 592, SMALL, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(300, 190, MEDIUM, white);
-    scene->Add(plat, STATIC);
-
-    plat = new Platform(200, 328, MEDIUMV, white);
-    scene->Add(plat, STATIC);
-
-    plat = new Platform(338, 428, MEDIUM, white);
-    scene->Add(plat, STATIC);
-
-    spike = new Spike(338, 160, MEDIUMSPIKE, white);
+    spike = new Spike(85, 557, SMALLSPIKE, white);
     scene->Add(spike, STATIC);
 
-    spike = new Spike(165, 290, LARGESPIKER, white);
+    spike = new Spike(346, 597, SMALLSPIKE, white);
+    scene->Add(spike, STATIC);
+
+    //PARTE CENTRAL
+
+    plat = new Platform(304, 192, MEDIUM, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(206, 330, MEDIUMV, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(342, 428, MEDIUM, white);
+    scene->Add(plat, STATIC);
+
+    spike = new Spike(341, 157, MEDIUMSPIKE, white);
+    scene->Add(spike, STATIC);
+
+    spike = new Spike(171, 296, LARGESPIKER, white);
+    scene->Add(spike, STATIC);
+
+
+    // PARTE DIREITA
+    plat = new Platform(681, 780, MEDIUM, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(778, 536, LARGEV, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(778, 638, SMALL, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(778, 474, SMALL, white);
+    scene->Add(plat, STATIC);
+
+
+    // PARTE DIREITA-CENTRO
+    plat = new Platform(778, -52, LARGEV, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(738, 54, MEDIUMV, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(640, 192, MEDIUM, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(603, 436, LARGEV, white);
+    scene->Add(plat, STATIC);
+
+    spike = new Spike(636, 157, MEDIUMSPIKE, white);
+    scene->Add(spike, STATIC);
+
+    spike = new Spike(568, 494, LARGESPIKER, white);
     scene->Add(spike, STATIC);
 
 
