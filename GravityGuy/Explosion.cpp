@@ -17,7 +17,7 @@
 
 Explosion::Explosion(int posXnew, int posYnew, Scene * s)
 {
-    tileset = new TileSet("Resources/GravityGuy.png", 32, 48, 5, 10);
+    tileset = new TileSet("Resources/death.png", 40, 40, 4, 4);
     anim = new Animation(tileset, 0.12f, false);
 
     uint normal[4] = { 1,2,3,4 };

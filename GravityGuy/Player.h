@@ -54,10 +54,15 @@ public:
     boolean waveDashing;
     Timer* waveDashTimer;
 
+    boolean grabbing;
+
     boolean hasSideJump;
     boolean sideJumping;
     Timer* sideJumpTimer;
     int sideJumpSide;
+
+    Timer* walkTimer;
+    boolean walkTimerOn;
 
     Player();                           // construtor
     ~Player();                          // destrutor

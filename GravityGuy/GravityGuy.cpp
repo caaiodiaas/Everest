@@ -30,17 +30,32 @@ void GravityGuy::Init()
     // cria sistema de áudio
     audio = new Audio();
     audio->Add(MENU, "Resources/Menu.wav");
-    audio->Add(MUSIC, "Resources/Music.wav");
-    audio->Add(TRANSITION, "Resources/Transition.wav");
+    audio->Add(MUSIC1, "Resources/music1.wav");
+    audio->Add(MUSIC2, "Resources/music2.wav");
+    audio->Add(MUSIC3, "Resources/music3.wav");
+    audio->Add(ENDING, "Resources/ending.wav");
+    audio->Add(WALK, "Resources/walk_sound.wav", 5);
+    audio->Volume(WALK, 1.5f);
+    audio->Add(JUMP, "Resources/jump_sound.wav");
+    audio->Volume(JUMP, 2);
+    audio->Add(DASH, "Resources/dash_sound.wav");
+    audio->Volume(DASH,1.5f);
+    audio->Add(STRAWBERRY, "Resources/strawberry_sound.wav");
+    audio->Add(DEATH, "Resources/death_sound.wav");
+    audio->Add(GRAB, "Resources/grab_sound.wav");
+    audio->Volume(GRAB,1.5f);
+
+
+
 
     // bounding box não visível
-    viewBBox = true;
+    viewBBox = false;
 
     // cria jogador
     player = new Player();
 
     // inicializa nível de abertura do jogo
-    level = new Level1();
+    level = new Home();
     level->Init();
 }
 

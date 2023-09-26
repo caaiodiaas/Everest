@@ -17,28 +17,28 @@
 
 Player::Player()
 {
-    tileset = new TileSet("Resources/player.png", 51, 57, 9, 63);
+    tileset = new TileSet("Resources/player.png", 51, 57, 12, 120);
     anim = new Animation(tileset, 0.090f, true);
 
     // sequências de animação do player
     uint stillRight[1] = { 0};
-    uint stillLeft[1] = { 17 };
+    uint stillLeft[1] = { 18 };
     uint walkingRight[8] = {1,2,3,4,5,6,7,8};
-    uint walkingLeft[8] = {16,15,14,13,12,11,10,9 };
-    uint dashingRight[5] = {49,48,47,46,45};
-    uint dashingLeft[5] = { 54,55,56,57,58};
-    uint jumpingRight[4] = { 18,19,20,21 };
-    uint jumpingLeft[4] = {30,29,28,27 };
-    uint jumpingRightB[4] = { 22,23,24,25 };
-    uint jumpingLeftB[4] = { 34,33,32,31 };
-    uint grabingRight[1] = { 36 };
-    uint grabingLeft[1] = { 37 };
-    uint grabingRightB[1] = { 38 };
-    uint grabingLeftB[1] = { 39 };
-    uint fallingRight[1] = { 21 };
-    uint fallingLeft[1] = { 27 };
-    uint fallingRightB[1] = { 25 };
-    uint fallingLeftB[1] = { 31 };
+    uint walkingLeft[8] = {17, 16, 15, 14, 13, 12, 10, 9};
+    uint dashingRight[5] = { 49, 50, 51, 52, 53 };
+    uint dashingLeft[5] = { 63, 62, 61, 60, 58 };
+    uint jumpingRight[4] = { 19, 20, 21, 22 };
+    uint jumpingLeft[4] = { 32, 31, 30, 29 };
+    uint jumpingRightB[4] = { 24,25,26,27 };
+    uint jumpingLeftB[4] = { 37, 36, 34, 33 };
+    uint grabingRight[1] = { 39 };
+    uint grabingLeft[1] = { 40 };
+    uint grabingRightB[1] = { 41 };
+    uint grabingLeftB[1] = { 42 };
+    uint fallingRight[4] = { 68, 69, 70,69 };
+    uint fallingLeft[4] = { 80, 79, 78,79 };
+    uint fallingRightB[4] = { 72, 73, 74,73 };
+    uint fallingLeftB[4] = { 84, 82, 81,82 };
 
     anim->Add(WALKINGRIGHT, walkingRight, 8);
     anim->Add(WALKINGLEFT, walkingLeft, 8);
@@ -54,10 +54,10 @@ Player::Player()
     anim->Add(GRABINGLEFT, grabingLeft, 1);
     anim->Add(GRABINGRIGHTB, grabingRightB, 1);
     anim->Add(GRABINGLEFTB, grabingLeftB, 1);
-    anim->Add(FALLINGRIGHT, fallingRight, 1);
-    anim->Add(FALLINGLEFT, fallingLeft, 1);
-    anim->Add(FALLINGRIGHTB, fallingRightB, 1);
-    anim->Add(FALLINGLEFTB, fallingLeftB, 1);
+    anim->Add(FALLINGRIGHT, fallingRight, 4);
+    anim->Add(FALLINGLEFT, fallingLeft, 4);
+    anim->Add(FALLINGRIGHTB, fallingRightB, 4);
+    anim->Add(FALLINGLEFTB, fallingLeftB, 4);
 
 
     // cria bounding box
@@ -69,22 +69,21 @@ Player::Player()
     
     level = 0;
 
-    // posição inicial
-    MoveTo(window->CenterX(), window->Height() - 300, Layer::FRONT);
-
     jumping = false;
     jumpTimer = new Timer();
 
-    hasDash = true;
+    hasDash = false;
     dashing = false;
     dashTimer = new Timer();
 
     waveDashing = false;
     waveDashTimer = new Timer();
 
-    hasSideJump = true;
+    hasSideJump = false;
     sideJumping = false;
     sideJumpTimer = new Timer();
+
+    walkTimer = new Timer();
 
     velX = 200;
     velY = 200;
@@ -100,6 +99,11 @@ Player::Player()
     lastSide = 0;
 
     onFloor = false;
+
+    walkTimerOn = false;
+
+    grabbing = false;
+
 }
 
 // ---------------------------------------------------------------------------------
@@ -118,6 +122,8 @@ void Player::Reset()
     velX = 200;
     velY = 200;
     isDead = false;
+    hasDash = false;
+    hasSideJump = false;
 }
 
 void Player::ResetAll()
@@ -155,6 +161,35 @@ void Player::Update()
 {
     // ação da gravidade sobre o personagem  
     Translate(0, gravity * gameTime);
+
+
+    if (anim->Frame() >= 39 && anim->Frame() <= 42)
+    {
+        if (!grabbing)
+        {
+            GravityGuy::audio->Play(GRAB);
+            grabbing = true;
+        }
+        grabbing = true;
+    }
+    else {
+        grabbing = false;
+    }
+
+
+    if (anim->Frame() >= 68 && anim->Frame() <= 84)
+    {
+        gravity = gravity+3;
+    }
+    else {
+        gravity = 200;
+    }
+
+    if (!walkTimerOn)
+    {
+        walkTimerOn = true;
+        walkTimer->Start();
+    }
 
 
     // atualiza animação
@@ -202,10 +237,18 @@ void Player::Update()
     }
 
     if (window->KeyDown(VK_RIGHT)) {
+
+
         lastSide = 0;
         Translate(velX * gameTime, 0);
         if (onFloor && !jumping)
         {
+
+            if (((int)(100*walkTimer->Elapsed())%40 == 0) && !(anim->Frame() >= 39 && anim->Frame() <= 42))
+            {
+                GravityGuy::audio->Play(WALK);
+            }
+
             anim->Select(WALKINGRIGHT);
         }
         else {
@@ -221,10 +264,16 @@ void Player::Update()
     }
 
     if (window->KeyDown(VK_LEFT)) {
+
         lastSide = 1;
         Translate(-velX * gameTime, 0);
         if (onFloor && !jumping)
         {
+
+            if (((int)(100 * walkTimer->Elapsed()) % 40 == 0) && !(anim->Frame() >= 39 && anim->Frame() <= 42))
+            {
+                GravityGuy::audio->Play(WALK);
+            }
             anim->Select(WALKINGLEFT);
         }
         else {
@@ -242,6 +291,7 @@ void Player::Update()
 
     if (hasDash && !dashing && window->KeyPress(VK_SPACE) && !waveDashing)
     {
+        GravityGuy::audio->Play(DASH);
         MoveTo(x, y - 5, Layer::MIDDLE);
         jumping = false;
         sideJumping = false;

@@ -25,6 +25,9 @@ void GameOver::Init()
     // cria fontes para exibição de texto
     font = new Font("Resources/Tahoma14.png");
     font->Spacing("Resources/Tahoma14.dat");
+
+    GravityGuy::audio->Volume(ENDING, 0.2f);
+    GravityGuy::audio->Play(ENDING);
 }
 
 // ----------------------------------------------------------------------
@@ -35,11 +38,11 @@ void GameOver::Update()
 
     deathCount.str("");
     deathCount << "x" << GravityGuy::player->deathCount;
-    font->Draw(window->CenterX(), 100, deathCount.str(), { 0.65f, 0.65f, 0.65f, 1.0f });
+    font->Draw(window->CenterX()+ 100, 95, deathCount.str(), { 0, 0, 0, 1 }, Layer::FRONT, 2);
 
     strawberryCount.str("");
-    strawberryCount << "x" << GravityGuy::player->strawberryCount << " /5";
-    font->Draw(window->CenterX(), 120, strawberryCount.str(), { 1.0f, 0.5f, 0.5f, 1.0f });
+    strawberryCount << "x" << GravityGuy::player->strawberryCount << "/3";
+    font->Draw(window->CenterX() - 45, 95, strawberryCount.str(), { 1, 0, 0, 1 }, Layer::FRONT, 2);
 
     if (window->KeyPress(VK_ESCAPE) || window->KeyPress(VK_RETURN)) {
         GravityGuy::player->ResetAll();

@@ -21,7 +21,7 @@
 
 // ------------------------------------------------------------------------------
 
-enum Sounds {MENU, MUSIC, TRANSITION};
+enum Sounds {MENU, MUSIC1, MUSIC2, MUSIC3, ENDING, WALK, DASH, JUMP, STRAWBERRY, DEATH, GRAB};
 
 // ------------------------------------------------------------------------------
 

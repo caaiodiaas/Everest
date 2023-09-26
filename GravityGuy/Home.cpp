@@ -21,6 +21,8 @@ void Home::Init()
     backg = new Sprite("Resources/TitleScreen.png");
     tileset = new TileSet("Resources/PressEnter.png", 72, 48, 1, 5);
     anim = new Animation(tileset, 0.180f, true);
+
+    GravityGuy::audio->Volume(MENU, 0.2f);
     GravityGuy::audio->Play(MENU, true);
 }
 

@@ -11,6 +11,7 @@
 
 #include "Platform.h"
 #include "Player.h"
+#include "GravityGuy.h"
 
 // ---------------------------------------------------------------------------------
 
@@ -86,6 +87,7 @@ void Platform::OnCollision(Object* obj)
                 player->Translate(0, -150 * gameTime);
                 player->sideJumping = false;
                 if (window->KeyPress(VK_UP) && !player->dashing) {
+                    GravityGuy::audio->Play(JUMP);
                     player->jumping = false;
                     player->MoveTo(x - platform->Width() / 2 - 25, player->Y(), Layer::MIDDLE);
                     player->sideJumping = true;
@@ -116,7 +118,6 @@ void Platform::OnCollision(Object* obj)
                 }
                 if (window->KeyDown(VK_LEFT) && player->hasSideJump && !player->jumping)
                 {
-                    
                     if (player->hasDash)
                     {
                         player->anim->Select(GRABINGLEFT);
@@ -127,6 +128,7 @@ void Platform::OnCollision(Object* obj)
                     player->Translate(0, -150 * gameTime);
                     player->sideJumping = false;
                     if (window->KeyPress(VK_UP) && !player->dashing) {
+                        GravityGuy::audio->Play(JUMP);
                         player->jumping = false;
                         player->MoveTo(x + platform->Width() / 2 + 25, player->Y(), Layer::MIDDLE);
                         player->sideJumping = true;
@@ -155,6 +157,7 @@ void Platform::OnCollision(Object* obj)
                     if (player->dashing && player->dashSide == 7 || player->dashSide == 5)
                     {
                         if (window->KeyDown(VK_SPACE)) {
+                            GravityGuy::audio->Play(JUMP);
                             player->MoveTo(player->X(), y - platform->Height() / 2 - 25, Layer::MIDDLE);
                             player->hasDash = true;
                             player->waveDashing = true;
@@ -165,6 +168,7 @@ void Platform::OnCollision(Object* obj)
                     else if (window->KeyPress(VK_UP)) {
                         if (player->X() > x - platform->Width() / 2 && player->X() < x + platform->Width() / 2 || player->X() < x + platform->Width() / 2 && player->X() > x - platform->Width() / 2)
                         {
+                            GravityGuy::audio->Play(JUMP);
                             player->MoveTo(player->X(), y - platform->Height() / 2 - 25, Layer::MIDDLE);
                             player->jumping = true;
                             player->jumpTimer->Start();

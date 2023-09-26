@@ -17,15 +17,13 @@
 
 Strawberry::Strawberry(int posXnew, int posYnew)
 {
-    tileset = new TileSet("Resources/GravityGuy.png", 32, 48, 5, 10);
+    tileset = new TileSet("Resources/strawberry.png", 32, 45, 12, 12);
     anim = new Animation(tileset, 0.120f, true);
 
-    // sequências de animação do strawberry
-    uint still[1] = { 0 };
-    uint invert[4] = { 6,7,8,9 };
-    uint normal[4] = { 1,2,3,4 };
 
-    anim->Add(0, normal, 4);
+    uint normal[12] = { 0,1,2,3,4,5,6,7,8,9,10,11};
+
+    anim->Add(0, normal, 12);
 
     // cria bounding box
     BBox(new Rect(
@@ -64,6 +62,10 @@ void Strawberry::Reset()
 void Strawberry::OnCollision(Object* obj)
 {
     if (obj->Type() == 0) {
+        if (!following)
+        {
+            GravityGuy::audio->Play(STRAWBERRY);
+        }
         player = (Player*)obj;
         following = true;
     }
@@ -75,11 +77,10 @@ void Strawberry::Update()
 {
     if (following)
     {
-        Translate((player->X() - x) * 2*gameTime,(player->Y() - y)  * 2*gameTime);
+        Translate((player->X()-25 - x) * 2*gameTime,(player->Y()-10 - y)  * 2*gameTime);
     }
 
     anim->Select(0);
-
     anim->NextFrame();
 }
 

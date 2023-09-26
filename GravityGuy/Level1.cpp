@@ -49,6 +49,7 @@ void Level1::Init()
     strawberry = new Strawberry(window->CenterX() + 300, window->Height() - 100);
     scene->Add(strawberry, MOVING);
 
+
     // ----------------------
     // plataformas
     // ----------------------
@@ -78,10 +79,10 @@ void Level1::Init()
     plat = new Platform(window->CenterX(), window->Height() +280,3, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(window->CenterX() + 200, window->Height() - 200,2, white);
+    plat = new Platform(window->CenterX() + 200, window->Height() - 180,2, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(window->Width() - 20, window->CenterY() +400, 3, white);
+    plat = new Platform(window->Width() - 20, window->CenterY() +420, 3, white);
     scene->Add(plat, STATIC);
 
     plat = new Platform(20, window->CenterY(), 3, white);
@@ -92,11 +93,10 @@ void Level1::Init()
     // ----------------------
 
     // inicia com música
-    GravityGuy::audio->Frequency(MUSIC, 0.94f);
-    GravityGuy::audio->Frequency(TRANSITION, 1.0f);
-    //GravityGuy::audio->Play(MUSIC);
 
-    
+    GravityGuy::audio->Volume(MUSIC1, 0.1f);
+    GravityGuy::audio->Play(MUSIC1,1);
+    GravityGuy::player->MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
 }
 
 // ------------------------------------------------------------------------------
@@ -107,8 +107,10 @@ void Level1::Update()
 
     if (GravityGuy::player->isDead)
     {
+        GravityGuy::audio->Play(DEATH);
         if (GravityGuy::player->Y() < window->Height())
         {
+            
             explosion = new Explosion(GravityGuy::player->X(), GravityGuy::player->Y(), scene);
         }
         else {
@@ -125,24 +127,22 @@ void Level1::Update()
     }
 
     Color deathColor{ 0.65f, 0.65f, 0.65f, 1.0f };
-
     deathCount.str("");
     deathCount << "x" << GravityGuy::player->deathCount;
-    font->Draw(100, 100, deathCount.str(), deathColor);
-
+    font->Draw(window->CenterX() - 300, 80, deathCount.str(), deathColor, Layer::FRONT, 1.5f);
 
     Color strawberryColor{ 1.0f, 0.5f, 0.5f, 1.0f };
     strawberryCount.str("");
-    strawberryCount << "x" << GravityGuy::player->strawberryCount << " /5";
-    font->Draw(100, 120, strawberryCount.str(), strawberryColor);
+    strawberryCount << "x" << GravityGuy::player->strawberryCount << "/3";
+    font->Draw(window->CenterX() - 300, 100, strawberryCount.str(), strawberryColor, Layer::FRONT, 1.5f);
 
     if (window->KeyPress(VK_ESCAPE))
     {
-        GravityGuy::audio->Stop(MUSIC);
+        GravityGuy::audio->Stop(MUSIC1);
         GravityGuy::NextLevel<Home>();
         GravityGuy::player->Reset();
     }
-    else if (GravityGuy::player->Top() > window->Height())
+    else if (GravityGuy::player->Y() -20 > window->Height())
     {
         GravityGuy::player->isDead = true;
     }
@@ -155,7 +155,7 @@ void Level1::Update()
             GravityGuy::player->strawberryCount++;
             strawberry->Reset();
         }
-        GravityGuy::audio->Stop(MUSIC);
+        GravityGuy::audio->Stop(MUSIC1);
         GravityGuy::NextLevel<Level2>();
     }
     else
