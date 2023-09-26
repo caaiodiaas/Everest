@@ -59,7 +59,7 @@ void Level2::Init()
     Spike* spike;
     float posX, posY;
     uint  platType;
-    Color white{ 1,1,1,1 };
+    Color white{ 1,1,0.9f,1 };
 
     // cria fontes para exibição de texto
     font = new Font("Resources/Tahoma14.png");
