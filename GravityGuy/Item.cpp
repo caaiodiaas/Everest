@@ -18,7 +18,6 @@ Item::Item(float posX, float posY, uint menuId, string imgFile)
     // cria tileset e animação
     tileset = new TileSet(imgFile, 179, 99, 2, 4);
     animation = new Animation(tileset, 0.100f, false);
-
     // define sequências de animação
     uint selected[3] = { 1,2,3 };
     uint notselected[1] = { 0 };
@@ -62,6 +61,13 @@ void Item::UnSelect()
     animation->Select(NOTSELECTED);
 }
 
+bool Item::Tutorial()
+{
+    if (type == 2)
+        return true;
+    else
+        return false;
+}
 // -------------------------------------------------------------------------------
 
 void Item::Update()

@@ -25,19 +25,24 @@
 
 // ------------------------------------------------------------------------------
 
-enum MenuID { INICIAR, SAIR, VENCER };
+enum MenuID { INICIAR, SAIR, TUTORIALKEY};
+
+enum TutorialStatus {ACTIVE, INACTIVE};
 
 // ------------------------------------------------------------------------------
 class Home : public Game
 {
 private:
-    static const int MaxItens = 2;
+    static const int MaxItens = 3;
     Scene* scene = nullptr;
     TileSet* backg = nullptr;       // pano de fundo
     TileSet* tileset = nullptr;    // tileset da animação
     Animation* anim = nullptr;     // animação do menu
     Mouse* mouse = nullptr;
     bool start;
+    bool exists;
+    TileSet* tutorial = nullptr;
+    Animation* Tutorialanim = nullptr;
 
     Item* menu[MaxItens] = { 0 };
 

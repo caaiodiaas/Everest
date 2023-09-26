@@ -37,6 +37,7 @@ public:
 
     void Select();                      // seleciona menu
     void UnSelect();                    // desmarca seleção
+    bool Tutorial();
 
     void Update();                      // atualização do objeto
     void Draw();                        // desenho do objeto
