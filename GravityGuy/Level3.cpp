@@ -9,7 +9,7 @@
 //
 **********************************************************************************/
 
-#include "GravityGuy.h"
+#include "Everest.h"
 #include "Home.h"
 #include "Level3.h"
 #include "GameOver.h"
@@ -42,7 +42,7 @@ void Level3::Init()
     scene->Add(backg, STATIC);
 
     // adiciona jogador na cena
-    scene->Add(GravityGuy::player, MOVING);
+    scene->Add(Everest::player, MOVING);
 
     // adiciona jogador na cena
     strawberry = new Strawberry(window->CenterX() + 300, window->Height() - 100);
@@ -91,10 +91,11 @@ void Level3::Init()
     // ----------------------
 
     // inicia com música
-    GravityGuy::audio->Volume(MUSIC3, 0.1f);
-    GravityGuy::audio->Play(MUSIC3);
+    Everest::audio->Volume(MUSIC3, 0.1f);
+    Everest::audio->Play(MUSIC3);
+    Everest::audio->Play(WIND);
 
-    GravityGuy::player->MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
+    Everest::player->MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
 }
 
 // ------------------------------------------------------------------------------
@@ -103,58 +104,60 @@ void Level3::Update()
 {
 
 
-    if (GravityGuy::player->isDead)
+    if (Everest::player->isDead)
     {
-        GravityGuy::audio->Play(DEATH);
-        if (GravityGuy::player->Y() < window->Height())
+        Everest::audio->Play(DEATH);
+        if (Everest::player->Y() < window->Height())
         {
 
-            explosion = new Explosion(GravityGuy::player->X(), GravityGuy::player->Y(), scene);
+            explosion = new Explosion(Everest::player->X(), Everest::player->Y(), scene);
         }
         else {
-            explosion = new Explosion(GravityGuy::player->X(), window->Height() - 20, scene);
+            explosion = new Explosion(Everest::player->X(), window->Height() - 20, scene);
         }
 
         scene->Add(explosion, STATIC);
         strawberry->Reset();
-        GravityGuy::player->deathCount++;
-        GravityGuy::player->Dead();
-        GravityGuy::player->MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
-        GravityGuy::player->Reset();
+        Everest::player->deathCount++;
+        Everest::player->Dead();
+        Everest::player->MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
+        Everest::player->Reset();
 
     }
 
     Color deathColor{ 0.65f, 0.65f, 0.65f, 1.0f };
     deathCount.str("");
-    deathCount << "x" << GravityGuy::player->deathCount;
+    deathCount << "x" << Everest::player->deathCount;
     font->Draw(window->CenterX() - 300, 80, deathCount.str(), deathColor, Layer::FRONT, 1.5f);
 
     Color strawberryColor{ 1.0f, 0.5f, 0.5f, 1.0f };
     strawberryCount.str("");
-    strawberryCount << "x" << GravityGuy::player->strawberryCount << "/3";
+    strawberryCount << "x" << Everest::player->strawberryCount << "/3";
     font->Draw(window->CenterX() - 300, 100, strawberryCount.str(), strawberryColor, Layer::FRONT, 1.5f);
 
     if (window->KeyPress(VK_ESCAPE))
     {
-        GravityGuy::audio->Stop(MUSIC3);
-        GravityGuy::NextLevel<Home>();
-        GravityGuy::player->Reset();
+        Everest::audio->Stop(WIND);
+        Everest::audio->Stop(MUSIC3);
+        Everest::NextLevel<Home>();
+        Everest::player->Reset();
     }
-    else if (GravityGuy::player->Y() - 20 > window->Height())
+    else if (Everest::player->Y() - 20 > window->Height())
     {
-        GravityGuy::player->isDead = true;
+        Everest::player->isDead = true;
     }
-    else if (GravityGuy::player->Right() > window->Width() || window->KeyPress('N'))
+    else if (Everest::player->Right() > window->Width() || window->KeyPress('N'))
     {
-        GravityGuy::player->MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
-        GravityGuy::player->Reset();
+        Everest::player->MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
+        Everest::player->Reset();
         if (strawberry->following)
         {
-            GravityGuy::player->strawberryCount++;
+            Everest::player->strawberryCount++;
             strawberry->Reset();
         }
-        GravityGuy::audio->Stop(MUSIC3);
-        GravityGuy::NextLevel<GameOver>();
+        Everest::audio->Stop(WIND);
+        Everest::audio->Stop(MUSIC3);
+        Everest::NextLevel<GameOver>();
     }
     else
     {
@@ -172,7 +175,7 @@ void Level3::Draw()
     backg->Draw();
     scene->Draw();
 
-    if (GravityGuy::viewBBox)
+    if (Everest::viewBBox)
         scene->DrawBBox();
 }
 
@@ -180,7 +183,7 @@ void Level3::Draw()
 
 void Level3::Finalize()
 {
-    scene->Remove(GravityGuy::player, MOVING);
+    scene->Remove(Everest::player, MOVING);
     delete scene;
 }
 

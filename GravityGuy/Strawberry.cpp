@@ -10,7 +10,7 @@
 **********************************************************************************/
 
 #include "Strawberry.h"
-#include "GravityGuy.h"
+#include "Everest.h"
 #include "Platform.h"
 
 // ---------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ void Strawberry::OnCollision(Object* obj)
     if (obj->Type() == 0) {
         if (!following)
         {
-            GravityGuy::audio->Play(STRAWBERRY);
+            Everest::audio->Play(STRAWBERRY);
         }
         player = (Player*)obj;
         following = true;

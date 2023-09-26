@@ -11,7 +11,7 @@
 
 #include "Engine.h"
 #include "GameOver.h"
-#include "GravityGuy.h"
+#include "Everest.h"
 #include "Home.h"
 #include "Font.h"
 
@@ -26,8 +26,9 @@ void GameOver::Init()
     font = new Font("Resources/Tahoma14.png");
     font->Spacing("Resources/Tahoma14.dat");
 
-    GravityGuy::audio->Volume(ENDING, 0.2f);
-    GravityGuy::audio->Play(ENDING);
+    Everest::audio->Volume(ENDING, 0.2f);
+    Everest::audio->Play(ENDING,1);
+    Everest::audio->Play(WIND, 1);
 }
 
 // ----------------------------------------------------------------------
@@ -35,18 +36,22 @@ void GameOver::Init()
 void GameOver::Update()
 {
 
-
     deathCount.str("");
-    deathCount << "x" << GravityGuy::player->deathCount;
+    deathCount << "x" << Everest::player->deathCount;
     font->Draw(window->CenterX()+ 100, 95, deathCount.str(), { 0, 0, 0, 1 }, Layer::FRONT, 2);
 
     strawberryCount.str("");
-    strawberryCount << "x" << GravityGuy::player->strawberryCount << "/3";
+    strawberryCount << "x" << Everest::player->strawberryCount << "/3";
     font->Draw(window->CenterX() - 45, 95, strawberryCount.str(), { 1, 0, 0, 1 }, Layer::FRONT, 2);
 
+
+    font->Draw(window->CenterX() - 30, 700, "PRESS ENTER", { 1, 0, 0, 1 }, Layer::FRONT, 2);
+
     if (window->KeyPress(VK_ESCAPE) || window->KeyPress(VK_RETURN)) {
-        GravityGuy::player->ResetAll();
-        GravityGuy::NextLevel<Home>();
+        Everest::player->ResetAll();
+        Everest::audio->Stop(ENDING);
+        Everest::audio->Stop(WIND);
+        Everest::NextLevel<Home>();
     }
 }
 

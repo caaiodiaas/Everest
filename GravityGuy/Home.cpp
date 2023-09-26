@@ -10,7 +10,7 @@
 **********************************************************************************/
 
 #include "Engine.h"
-#include "GravityGuy.h"
+#include "Everest.h"
 #include "Home.h"
 #include "Level1.h"
 #include "Item.h"
@@ -36,8 +36,8 @@ void Home::Init()
         scene->Add(menu[i], STATIC);
 
 
-    GravityGuy::audio->Volume(MENU, 0.2f);
-    GravityGuy::audio->Play(MENU, true);
+    Everest::audio->Volume(MENU, 0.2f);
+    Everest::audio->Play(MENU, true);
 }
 
 // ------------------------------------------------------------------------------
@@ -54,8 +54,8 @@ void Home::Update()
     // se a tecla ENTER for pressionada
     if (window->KeyPress(VK_RETURN))
     {
-        GravityGuy::audio->Stop(MENU);
-        GravityGuy::NextLevel<Level1>();
+        Everest::audio->Stop(MENU);
+        Everest::NextLevel<Level1>();
     }
     else
     {
@@ -94,8 +94,8 @@ void Home::Update()
     }
 
     if (start) {
-        GravityGuy::audio->Stop(MENU);
-        GravityGuy::NextLevel<Level1>();
+        Everest::audio->Stop(MENU);
+        Everest::NextLevel<Level1>();
     }
 }
 

@@ -80,8 +80,8 @@ void Background::Draw()
     if (yF - imgF->Height()/2.0f > window->Height())
         yF -= imgF->Height();
 
-    strawberryIcon->Draw(60, 88, Layer::FRONT, 1);
-    deathIcon->Draw(60, 68, Layer::FRONT, 1);
+    strawberryIcon->Draw(60, 48, Layer::FRONT, 1);
+    deathIcon->Draw(60, 28, Layer::FRONT, 1);
 }
 
 // -------------------------------------------------------------------------------

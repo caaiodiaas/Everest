@@ -11,7 +11,7 @@
 
 #include "Spike.h"
 #include "Player.h"
-#include "GravityGuy.h"
+#include "Everest.h"
 #include "Level1.h"
 #include "Platform.h"
 
@@ -21,10 +21,15 @@ Spike::Spike(float posX, float posY, uint spikeType, Color tint) : color(tint)
 {
     switch (spikeType)
     {
-    case SMALL:  spike = new Sprite("Resources/Finish.png"); type = SMALL; break;
-    case MEDIUM: spike = new Sprite("Resources/Finish.png"); type = MEDIUM; break;
-    case LARGE:  spike = new Sprite("Resources/Finish.png"); type = LARGE; break;
-    case FINISH: spike = new Sprite("Resources/Finish.png"); type = FINISH; break;
+    case LARGESPIKE:  spike = new Sprite("Resources/LongSpikeHorizontal.png"); type = LARGESPIKE; break;
+    case MEDIUMSPIKE: spike = new Sprite("Resources/MediumSpikeHorizontal.png"); type = MEDIUMSPIKE; break;
+    case SMALLSPIKE:  spike = new Sprite("Resources/SmallSpikeHorizontal.png"); type = SMALLSPIKE; break;
+    case LARGESPIKEL:  spike = new Sprite("Resources/LongSpikeVerticalLeft.png"); type = LARGESPIKEL; break;
+    case MEDIUMSPIKEL: spike = new Sprite("Resources/MediumSpikeVerticalLeft.png"); type = MEDIUMSPIKEL; break;
+    case SMALLSPIKEL:  spike = new Sprite("Resources/SmallSpikeVerticalLeft.png"); type = SMALLSPIKEL; break;
+    case LARGESPIKER:  spike = new Sprite("Resources/LongSpikeVerticalRight.png"); type = LARGESPIKER; break;
+    case MEDIUMSPIKER: spike = new Sprite("Resources/MediumSpikeVerticalRight.png"); type = MEDIUMSPIKER; break;
+    case SMALLSPIKER:  spike = new Sprite("Resources/SmallSpikeVerticalRight.png"); type = SMALLSPIKER; break;
     }
 
 
