@@ -69,11 +69,9 @@ void Home::Update()
     {
         start = true;
     }
-    else
-    {
-        anim->NextFrame();
-        scene->Update();
-    }
+
+    anim->NextFrame();
+    scene->Update();
 
 
     for (int i = 0; i < MaxItens; ++i)
@@ -126,11 +124,14 @@ void Home::Update()
         Everest::audio->Stop(MENU);
         Everest::NextLevel<Level1>();
     }
-
-    if (startB) {
-        Everest::audio->Stop(MENU);
-        Everest::NextLevel<Level1B>();
+    else {
+        if (startB) {
+            Everest::audio->Stop(MENU);
+            Everest::NextLevel<Level1B>();
+        }
     }
+
+
 }
 
 // ------------------------------------------------------------------------------

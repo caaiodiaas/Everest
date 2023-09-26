@@ -45,7 +45,7 @@ void GameOver::Update()
     font->Draw(window->CenterX() - 45, 95, strawberryCount.str(), { 1, 0, 0, 1 }, Layer::FRONT, 2);
 
 
-    font->Draw(window->CenterX() - 30, 700, "PRESS ENTER", { 1, 0, 0, 1 }, Layer::FRONT, 2);
+    font->Draw(window->CenterX() - 50, 700, "PRESSIONE ENTER", { 1, 0, 0, 1 }, Layer::FRONT, 2);
 
     if (window->KeyPress(VK_ESCAPE) || window->KeyPress(VK_RETURN)) {
         Everest::player->ResetAll();
